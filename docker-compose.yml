@@ -1,0 +1,28 @@
+version: "3.8"
+services:
+  dev:
+    image: makepi
+    command: sh -c "tail -f /dev/null"
+    working_dir: /src
+    volumes:
+      - ./:/src:delegated
+      - /src/node_modules
+      - ~/.ssh:/root/.ssh:ro
+    ports:
+      - 8888:8888
+  database:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'makepi'
+      MYSQL_USER: 'dev'
+      MYSQL_PASSWORD: 'dev'
+      MYSQL_ROOT_PASSWORD: 'makepi'
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'
+    volumes:
+      - db:/var/lib/mysql
+volumes:
+  db:

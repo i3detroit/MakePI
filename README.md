@@ -1,6 +1,16 @@
+# MakePI
 
+## Quick Start with VS Code
 
-# MakePi
+> Make sure docker is installed. Docker Desktop is recommended.
+
+Run `npm run docker:build` to generate the developer docker image.
+
+In the Command Palette, select `Remote-Containers: Open Folder in Container ...`
+
+Select the root folder of this project.
+
+---
 
 This project was generated using [Nx](https://nx.dev).
 
@@ -78,8 +88,6 @@ Run `nx dep-graph` to see a diagram of the dependencies of your projects.
 ## Further help
 
 Visit the [Nx Documentation](https://nx.dev) to learn more.
-
-
 
 ## ☁ Nx Cloud
 
