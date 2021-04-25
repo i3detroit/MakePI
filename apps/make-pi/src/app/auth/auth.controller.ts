@@ -3,6 +3,8 @@ import {
   LoginUserDto,
   AuthReturn,
   RegisterUserDto,
+  FailedLoginReasons,
+  failedLoginMessages,
 } from '@make-pi/shared/auth';
 import {
   Controller,
@@ -25,7 +27,14 @@ export class AuthController {
       return await this.authService.login(body);
     } catch (err) {
       console.error(err);
-      throw new UnauthorizedException({ message: [`Invalid Login`] });
+      switch (err.message) {
+        case FailedLoginReasons.ACCOUNT_LOCKED:
+          throw new UnauthorizedException({
+            message: [failedLoginMessages[FailedLoginReasons.ACCOUNT_LOCKED]],
+          });
+        default:
+          throw new UnauthorizedException({ message: ['Invalid Login'] });
+      }
     }
   }
 

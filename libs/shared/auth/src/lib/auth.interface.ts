@@ -35,6 +35,13 @@ export interface AuthReturn {
 }
 
 export enum FailedLoginReasons {
-  NOT_FOUND = 'User not found',
-  PASSWORD_INCORRECT = 'Incorrect password',
+  NOT_FOUND = 'NOT_FOUND',
+  PASSWORD_INCORRECT = 'PASSWORD_INCORRECT',
+  ACCOUNT_LOCKED = 'ACCOUNT_LOCKED',
 }
+
+export const failedLoginMessages = {
+  NOT_FOUND: 'User not found',
+  PASSWORD_INCORRECT: 'Incorrect password',
+  ACCOUNT_LOCKED: 'Account locked',
+};
