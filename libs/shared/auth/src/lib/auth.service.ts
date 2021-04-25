@@ -47,12 +47,11 @@ export class AuthService {
   }
 
   async register(data: Register): Promise<AuthReturn> {
-    const result = await this.usersService.create(data);
-    const [identifier] = result.identifiers;
+    const user = await this.usersService.create(data);
     const token = this.jwtService.sign(
       {
-        sub: identifier.id,
-        email: data.email.toLowerCase(),
+        sub: user.id,
+        email: user.email,
       },
       { expiresIn: Number(process.env.JWT_EXPIRY) || 86400 }
     );

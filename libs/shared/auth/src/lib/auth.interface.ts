@@ -4,6 +4,7 @@ export interface Register {
   email: string;
   password: string;
 }
+
 export interface Login extends Register {
   remember?: boolean;
 }

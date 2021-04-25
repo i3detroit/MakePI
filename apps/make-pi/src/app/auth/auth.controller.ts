@@ -10,6 +10,8 @@ import {
   Body,
   UsePipes,
   ValidationPipe,
+  BadRequestException,
+  UnauthorizedException,
 } from '@nestjs/common';
 
 @Controller('auth')
@@ -18,13 +20,30 @@ export class AuthController {
 
   @Post('/login')
   @UsePipes(new ValidationPipe())
-  login(@Body() body: LoginUserDto): Promise<AuthReturn> {
-    return this.authService.login(body);
+  async login(@Body() body: LoginUserDto): Promise<AuthReturn> {
+    try {
+      return await this.authService.login(body);
+    } catch (err) {
+      console.error(err);
+      throw new UnauthorizedException({ message: [`Invalid Login`] });
+    }
   }
 
   @Post('/register')
   @UsePipes(new ValidationPipe())
-  register(@Body() body: RegisterUserDto): Promise<AuthReturn> {
-    return this.authService.register(body);
+  async register(@Body() body: RegisterUserDto): Promise<AuthReturn> {
+    try {
+      return await this.authService.register(body);
+    } catch (err) {
+      console.error(err);
+      switch (err.code) {
+        case 'ER_DUP_ENTRY':
+          throw new BadRequestException({
+            message: [`Duplicate entry for ${body.email}`],
+          });
+        default:
+          throw new BadRequestException(err);
+      }
+    }
   }
 }

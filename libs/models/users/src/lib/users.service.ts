@@ -1,8 +1,8 @@
 import { Injectable, Inject } from '@nestjs/common';
-import { InsertResult, Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 import { User } from '@make-pi/shared/database';
 import { BcryptService } from '@make-pi/shared/bcrypt';
-import { CreateUser } from './users.interface';
+import { CreateUser, ReturnCreatedUser } from './users.interface';
 
 @Injectable()
 export class UsersService {
@@ -28,13 +28,19 @@ export class UsersService {
     return this.userRepository.findOne({ email: email.toLowerCase() });
   }
 
-  async create(data: CreateUser): Promise<InsertResult> {
+  async create(data: CreateUser): Promise<ReturnCreatedUser> {
     const { email, password } = data;
     const rounds = Number(process.env.BCRYPT_SALT_WORK_FACTOR) || 11;
     const salt = await this.bcryptService.genSalt(rounds);
     const hash = await this.bcryptService.hash(password, salt);
     data.email = email.toLowerCase();
     data.password = hash;
-    return this.userRepository.insert(data);
+    const result = await this.userRepository.insert(data);
+    const [generatedMap] = result.generatedMaps;
+    return {
+      id: generatedMap.id,
+      email: data.email,
+      active: generatedMap.active,
+    };
   }
 }
