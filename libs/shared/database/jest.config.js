@@ -1,5 +1,5 @@
 module.exports = {
-  displayName: 'shared-database',
+  displayName: 'database',
   preset: '../../../jest.preset.js',
   globals: {
     'ts-jest': {

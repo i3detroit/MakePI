@@ -1,5 +1,5 @@
 module.exports = {
-  displayName: 'auth',
+  displayName: 'bcrypt',
   preset: '../../../jest.preset.js',
   globals: {
     'ts-jest': {
@@ -11,5 +11,5 @@ module.exports = {
     '^.+\\.[tj]sx?$': 'ts-jest',
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-  coverageDirectory: '../../../coverage/libs/shared/auth',
+  coverageDirectory: '../../../coverage/libs/shared/bcrypt',
 };

@@ -17,8 +17,9 @@
   },
   "projects": {
     "make-pi": { "tags": [] },
-    "shared-database": { "tags": [] },
+    "database": { "tags": [] },
     "models-users": { "tags": [] },
-    "shared-auth": { "tags": [] }
+    "auth": { "tags": [] },
+    "bcrypt": { "tags": [] }
   }
 }
