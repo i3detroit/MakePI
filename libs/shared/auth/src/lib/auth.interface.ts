@@ -1,5 +1,11 @@
 import { IsBoolean, IsEmail, IsString, Length } from 'class-validator';
 
+export interface Auth {
+  email: string;
+  password: string;
+  remember?: boolean;
+}
+
 export class AuthDto {
   @IsEmail()
   @Length(3, 1024)
