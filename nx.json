@@ -18,6 +18,7 @@
   "projects": {
     "make-pi": { "tags": [] },
     "shared-database": { "tags": [] },
-    "models-users": { "tags": [] }
+    "models-users": { "tags": [] },
+    "shared-auth": { "tags": [] }
   }
 }

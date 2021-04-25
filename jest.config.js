@@ -3,5 +3,6 @@ module.exports = {
     '<rootDir>/apps/make-pi',
     '<rootDir>/libs/shared/database',
     '<rootDir>/libs/models/users',
+    '<rootDir>/libs/shared/auth',
   ],
 };
