@@ -19,7 +19,7 @@ export class User {
   @Column('int', { default: 0 })
   loginAttempts: number;
 
-  @Column({ type: 'timestamptz', nullable: true })
+  @Column({ type: 'timestamp', nullable: true })
   lockUntil: Date;
 
   @Column({ length: 36, nullable: true })
