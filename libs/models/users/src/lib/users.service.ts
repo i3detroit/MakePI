@@ -1,12 +1,15 @@
 import { Injectable, Inject } from '@nestjs/common';
-import { InsertResult, Repository, UpdateResult } from 'typeorm';
+import { InsertResult, Repository } from 'typeorm';
 import { User } from '@make-pi/shared/database';
+import { BcryptService } from '@make-pi/shared/bcrypt';
+import { CreateUser } from './users.interface';
 
 @Injectable()
 export class UsersService {
   constructor(
     @Inject('USER_REPOSITORY')
-    private userRepository: Repository<User>
+    private userRepository: Repository<User>,
+    private bcryptService: BcryptService
   ) {}
 
   findAll(): Promise<User[]> {
@@ -25,11 +28,13 @@ export class UsersService {
     return this.userRepository.findOne({ email: email.toLowerCase() });
   }
 
-  create(data: User): Promise<InsertResult> {
+  async create(data: CreateUser): Promise<InsertResult> {
+    const { email, password } = data;
+    const rounds = Number(process.env.BCRYPT_SALT_WORK_FACTOR) || 11;
+    const salt = await this.bcryptService.genSalt(rounds);
+    const hash = await this.bcryptService.hash(password, salt);
+    data.email = email.toLowerCase();
+    data.password = hash;
     return this.userRepository.insert(data);
-  }
-
-  update(id: number, data: User): Promise<UpdateResult> {
-    return this.userRepository.update(id, data);
   }
 }

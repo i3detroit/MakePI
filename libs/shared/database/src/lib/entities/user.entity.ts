@@ -1,6 +1,4 @@
 import { Entity, Column, PrimaryGeneratedColumn, Index } from 'typeorm';
-import { IsEmail } from 'class-validator';
-import { Transform } from 'class-transformer';
 
 @Entity()
 export class User {
@@ -9,8 +7,6 @@ export class User {
 
   @Column({ length: 1024 })
   @Index({ unique: true })
-  @IsEmail()
-  @Transform(({ value }) => value.toLowerCase())
   email: string;
 
   @Column('text')
