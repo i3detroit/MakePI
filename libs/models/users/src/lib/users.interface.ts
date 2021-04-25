@@ -3,6 +3,16 @@ export interface CreateUser {
   password: string;
 }
 
+export interface UpdateUser {
+  email?: string;
+  password?: string;
+  loginAttempts?: number;
+  lockUntil?: Date;
+  recoverCode?: string;
+  active?: boolean;
+  verificationCode?: string;
+}
+
 export interface ReturnCreatedUser {
   id: string;
   email: string;

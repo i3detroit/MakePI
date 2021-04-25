@@ -38,10 +38,12 @@ export enum FailedLoginReasons {
   NOT_FOUND = 'NOT_FOUND',
   PASSWORD_INCORRECT = 'PASSWORD_INCORRECT',
   ACCOUNT_LOCKED = 'ACCOUNT_LOCKED',
+  INVALID_RECOVERY_CODE = 'INVALID_RECOVERY_CODE',
 }
 
 export const failedLoginMessages = {
   NOT_FOUND: 'User not found',
   PASSWORD_INCORRECT: 'Incorrect password',
   ACCOUNT_LOCKED: 'Account locked',
+  INVALID_RECOVERY_CODE: 'Invalid recovery code',
 };

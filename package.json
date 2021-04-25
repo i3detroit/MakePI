@@ -41,7 +41,8 @@
     "reflect-metadata": "^0.1.13",
     "rxjs": "~6.6.3",
     "tslib": "^2.0.0",
-    "typeorm": "^0.2.32"
+    "typeorm": "^0.2.32",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@nestjs/schematics": "^7.0.0",
