@@ -78,7 +78,14 @@ export class AuthController {
       );
     } catch (err) {
       console.error(err);
-      throw new BadRequestException(err);
+      switch (err.message) {
+        case FailedLoginReasons.ACCOUNT_LOCKED:
+          throw new UnauthorizedException({
+            message: [failedLoginMessages[FailedLoginReasons.ACCOUNT_LOCKED]],
+          });
+        default:
+          throw new UnauthorizedException({ message: ['Invalid Login'] });
+      }
     }
   }
 
@@ -90,7 +97,14 @@ export class AuthController {
       console.log({ recoverCode }); // TODO: Send in email
     } catch (err) {
       console.error(err);
-      throw new BadRequestException(err);
+      switch (err.message) {
+        case FailedLoginReasons.NOT_FOUND:
+          throw new UnauthorizedException({
+            message: [failedLoginMessages[FailedLoginReasons.NOT_FOUND]],
+          });
+        default:
+          throw new BadRequestException(err);
+      }
     }
   }
 
@@ -105,7 +119,20 @@ export class AuthController {
       );
     } catch (err) {
       console.error(err);
-      throw new BadRequestException(err);
+      switch (err.message) {
+        case FailedLoginReasons.NOT_FOUND:
+          throw new UnauthorizedException({
+            message: [failedLoginMessages[FailedLoginReasons.NOT_FOUND]],
+          });
+        case FailedLoginReasons.INVALID_RECOVERY_CODE:
+          throw new UnauthorizedException({
+            message: [
+              failedLoginMessages[FailedLoginReasons.INVALID_RECOVERY_CODE],
+            ],
+          });
+        default:
+          throw new BadRequestException(err);
+      }
     }
   }
 }
