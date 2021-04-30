@@ -46,7 +46,7 @@ export class AuthService {
 
     await this.resetLoginAttempts(user.id);
 
-    let token;
+    let token: string;
     if (data.remember) {
       token = this.jwtService.sign({
         sub: user.id,
@@ -67,7 +67,7 @@ export class AuthService {
 
   async register(data: Register): Promise<AuthReturn> {
     const user = await this.usersService.create(data);
-    const token = this.jwtService.sign(
+    const token: string = this.jwtService.sign(
       {
         sub: user.id,
         email: user.email,
@@ -114,24 +114,27 @@ export class AuthService {
     await this.usersService.update(id, { password: newPassword });
   }
 
-  async recoverCode(id: string): Promise<string> {
-    const user = await this.usersService.findOneById(id);
+  async recoverCode(email: string): Promise<string> {
+    const user = await this.usersService.findOneByEmail(email);
     if (!user) throw new Error(FailedLoginReasons.NOT_FOUND);
 
     const recoverCode = this._random(36);
-    await this.usersService.update(id, { recoverCode });
+    await this.usersService.update(user.id, { recoverCode });
     return recoverCode;
   }
 
-  async resetPassword(id: string, recoverCode: string, newPassword: string) {
-    const user = await this.usersService.findOneById(id);
+  async resetPassword(email: string, recoverCode: string, newPassword: string) {
+    const user = await this.usersService.findOneByEmail(email);
     if (!user) throw new Error(FailedLoginReasons.NOT_FOUND);
 
     if (user.recoverCode !== recoverCode) {
       throw new Error(FailedLoginReasons.INVALID_RECOVERY_CODE);
     }
 
-    await this.usersService.update(id, { password: newPassword });
+    await this.usersService.update(user.id, {
+      password: newPassword,
+      recoverCode: null,
+    });
   }
 
   private _random(length) {

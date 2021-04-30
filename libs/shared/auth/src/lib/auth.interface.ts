@@ -30,8 +30,45 @@ export class RegisterUserDto {
   password: string;
 }
 
+export class RecoveryCodeDto {
+  @IsString()
+  email: string;
+}
+
+export class ResetPasswordDto {
+  @IsString()
+  email: string;
+
+  @IsString()
+  recoverCode: string;
+
+  @IsString()
+  newPassword: string;
+}
+
+export class ChangePasswordDto {
+  @IsString()
+  password: string;
+
+  @IsString()
+  newPassword: string;
+}
+
 export interface AuthReturn {
   token: string;
+}
+
+export interface Claim {
+  sub: string;
+  email: string;
+  iat: number;
+  exp?: number;
+}
+
+export interface ClaimVerifyResult {
+  readonly claim?: Claim;
+  readonly isValid: boolean;
+  readonly error?: Error;
 }
 
 export enum FailedLoginReasons {
@@ -39,6 +76,7 @@ export enum FailedLoginReasons {
   PASSWORD_INCORRECT = 'PASSWORD_INCORRECT',
   ACCOUNT_LOCKED = 'ACCOUNT_LOCKED',
   INVALID_RECOVERY_CODE = 'INVALID_RECOVERY_CODE',
+  JWT_EXPIRED = 'JWT_EXPIRED',
 }
 
 export const failedLoginMessages = {
@@ -46,4 +84,5 @@ export const failedLoginMessages = {
   PASSWORD_INCORRECT: 'Incorrect password',
   ACCOUNT_LOCKED: 'Account locked',
   INVALID_RECOVERY_CODE: 'Invalid recovery code',
+  JWT_EXPIRED: 'Authorization expired',
 };
