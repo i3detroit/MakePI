@@ -11,13 +11,30 @@ import { JwtService } from '@nestjs/jwt';
 import * as moment from 'moment-timezone';
 import { ConfigService } from '@nestjs/config';
 
+/**
+ * Auth Service
+ *
+ * @remarks
+ * Contains methods for authenticating and authorizing requests
+ */
 @Injectable()
 export class AuthService {
+  /**
+   * Expiration time of JWT in seconds
+   */
   private jwtExpiry = this.configService.get<number>('JWT_EXPIRY', 86400);
+
+  /**
+   * Number of failed login attempts allowed before account lock
+   */
   private maxLoginAttempts = this.configService.get<number>(
     'MAX_LOGIN_ATTEMPTS',
     10
   );
+
+  /**
+   * Length of time in minutes to lock account for
+   */
   private lockTime = this.configService.get<number>('LOCK_TIME', 60);
 
   constructor(
@@ -27,6 +44,12 @@ export class AuthService {
     private configService: ConfigService
   ) {}
 
+  /**
+   * Login
+   *
+   * @param data - Login object
+   * @returns - JWT Token
+   */
   async login(data: Login): Promise<AuthReturn> {
     const user = await this.usersService.findOneByEmail(data.email);
     if (!user) throw new Error(FailedLoginReasons.NOT_FOUND);
@@ -65,6 +88,12 @@ export class AuthService {
     return { token };
   }
 
+  /**
+   * Register
+   *
+   * @param data - Register object
+   * @returns - JWT Token
+   */
   async register(data: Register): Promise<AuthReturn> {
     const user = await this.usersService.create(data);
     const token: string = this.jwtService.sign(
@@ -77,6 +106,12 @@ export class AuthService {
     return { token };
   }
 
+  /**
+   * Increase Login Attempts by 1
+   * Lock account when limit reached
+   *
+   * @param id - User ID
+   */
   async increaseLoginAttempts(id: string): Promise<void> {
     const user = await this.usersService.findOneById(id);
 
@@ -98,11 +133,27 @@ export class AuthService {
     await this.usersService.update(id, payload);
   }
 
+  /**
+   * Reset login attempts to 0
+   *
+   * @param id - User ID
+   */
   async resetLoginAttempts(id: string): Promise<void> {
     await this.usersService.update(id, { loginAttempts: 0, lockUntil: null });
   }
 
-  async changePassword(id: string, password: string, newPassword: string) {
+  /**
+   * Change Password
+   *
+   * @param id - User ID
+   * @param password - Current Password
+   * @param newPassword - New Password
+   */
+  async changePassword(
+    id: string,
+    password: string,
+    newPassword: string
+  ): Promise<void> {
     const user = await this.usersService.findOneById(id);
     if (!user) throw new Error(FailedLoginReasons.NOT_FOUND);
 
@@ -114,6 +165,12 @@ export class AuthService {
     await this.usersService.update(id, { password: newPassword });
   }
 
+  /**
+   * Generate password recovery code
+   *
+   * @param email - User login email address
+   * @returns - Recovery Code
+   */
   async recoverCode(email: string): Promise<string> {
     const user = await this.usersService.findOneByEmail(email);
     if (!user) throw new Error(FailedLoginReasons.NOT_FOUND);
@@ -123,7 +180,17 @@ export class AuthService {
     return recoverCode;
   }
 
-  async resetPassword(email: string, recoverCode: string, newPassword: string) {
+  /**
+   *
+   * @param email - User login email address
+   * @param recoverCode - Recovery Code
+   * @param newPassword - New password
+   */
+  async resetPassword(
+    email: string,
+    recoverCode: string,
+    newPassword: string
+  ): Promise<void> {
     const user = await this.usersService.findOneByEmail(email);
     if (!user) throw new Error(FailedLoginReasons.NOT_FOUND);
 
@@ -137,6 +204,12 @@ export class AuthService {
     });
   }
 
+  /**
+   * Random string generator
+   *
+   * @param length - Length of random string to generate
+   * @returns - Random string
+   */
   private _random(length) {
     const result = [];
     const characters =

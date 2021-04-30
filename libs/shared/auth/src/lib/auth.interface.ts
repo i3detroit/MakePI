@@ -1,14 +1,33 @@
 import { IsBoolean, IsEmail, IsString, Length } from 'class-validator';
 
+/**
+ * Registration parameters
+ */
 export interface Register {
+  /**
+   * User login email address
+   */
   email: string;
+
+  /**
+   * Hashed and salted user password
+   */
   password: string;
 }
 
+/**
+ * Login parameters
+ */
 export interface Login extends Register {
+  /**
+   * Remember account (Removes expiration from JWT Token)
+   */
   remember?: boolean;
 }
 
+/**
+ * Login User Validation
+ */
 export class LoginUserDto {
   @IsEmail()
   @Length(1, 1024)
@@ -21,6 +40,9 @@ export class LoginUserDto {
   remember?: boolean;
 }
 
+/**
+ * Register User Validation
+ */
 export class RegisterUserDto {
   @IsEmail()
   @Length(1, 1024)
@@ -30,11 +52,17 @@ export class RegisterUserDto {
   password: string;
 }
 
+/**
+ * Recovery Code Validation
+ */
 export class RecoveryCodeDto {
   @IsString()
   email: string;
 }
 
+/**
+ * Reset Password Validation
+ */
 export class ResetPasswordDto {
   @IsString()
   email: string;
@@ -46,6 +74,9 @@ export class ResetPasswordDto {
   newPassword: string;
 }
 
+/**
+ * Change Password Validation
+ */
 export class ChangePasswordDto {
   @IsString()
   password: string;
@@ -54,23 +85,64 @@ export class ChangePasswordDto {
   newPassword: string;
 }
 
+/**
+ * Authorization Return Object
+ */
 export interface AuthReturn {
+  /**
+   * JWT Token
+   */
   token: string;
 }
 
+/**
+ * JWT Claim object
+ */
 export interface Claim {
+  /**
+   * User primary index ID
+   */
   sub: string;
+
+  /**
+   * User login email address
+   */
   email: string;
+
+  /**
+   * Seconds from epoch JWT was signed
+   */
   iat: number;
+
+  /**
+   * Expiration timestamp
+   */
   exp?: number;
 }
 
+/**
+ * Claim Verification Result
+ */
 export interface ClaimVerifyResult {
+  /**
+   * Claim object
+   */
   readonly claim?: Claim;
+
+  /**
+   * Returns true if Claim is valid
+   */
   readonly isValid: boolean;
+
+  /**
+   * Error
+   */
   readonly error?: Error;
 }
 
+/**
+ * Failed Login Reasons
+ */
 export enum FailedLoginReasons {
   NOT_FOUND = 'NOT_FOUND',
   PASSWORD_INCORRECT = 'PASSWORD_INCORRECT',
@@ -79,6 +151,9 @@ export enum FailedLoginReasons {
   JWT_EXPIRED = 'JWT_EXPIRED',
 }
 
+/**
+ * Failed Login Messages
+ */
 export const failedLoginMessages = {
   NOT_FOUND: 'User not found',
   PASSWORD_INCORRECT: 'Incorrect password',

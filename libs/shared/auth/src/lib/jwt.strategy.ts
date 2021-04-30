@@ -5,21 +5,21 @@ import {
   failedLoginMessages,
   FailedLoginReasons,
 } from './auth.interface';
-import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 
+/**
+ * JWT Strategy for AuthGuard
+ */
 @Injectable()
 export class JwtStrategy {
-  private jwtSecret = this.configService.get<string>(
-    'JWT_SECRET',
-    'hard!to-guess_secret'
-  );
+  constructor(private jwtService: JwtService) {}
 
-  constructor(
-    private configService: ConfigService,
-    private jwtService: JwtService
-  ) {}
-
+  /**
+   * Validate JWT in Request
+   *
+   * @param request - Request
+   * @returns - True if JWT is valid
+   */
   public async validate(request): Promise<boolean> {
     try {
       const result = await this._handler(request);
@@ -34,6 +34,12 @@ export class JwtStrategy {
     }
   }
 
+  /**
+   * AuthGuard Handler
+   *
+   * @param request - Request
+   * @returns - Claim Verification Result
+   */
   private async _handler(request): Promise<ClaimVerifyResult> {
     let result: ClaimVerifyResult;
 
