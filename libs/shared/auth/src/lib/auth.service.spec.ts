@@ -3,13 +3,11 @@ import * as moment from 'moment-timezone';
 import { Test } from '@nestjs/testing';
 import { AuthService } from './auth.service';
 import { BcryptService } from '@make-pi/shared/bcrypt';
+import { JwtService } from '@nestjs/jwt';
 
 const id = 'uuid-id-user';
-
 const password = '1234567890';
-
 const mockToken = 'mocktoken!!!';
-
 const mockUser = {
   id,
   email: 'email@example.com',
@@ -20,6 +18,7 @@ describe('AuthService::', () => {
   let service: AuthService;
   let usersService: UsersService;
   let bcryptService: BcryptService;
+  let jwtService: JwtService;
 
   beforeEach(async () => {
     const module = await Test.createTestingModule({
@@ -58,6 +57,7 @@ describe('AuthService::', () => {
     service = module.get<AuthService>(AuthService);
     usersService = module.get<UsersService>(UsersService);
     bcryptService = module.get<BcryptService>(BcryptService);
+    jwtService = module.get<JwtService>(JwtService);
   });
 
   it('should be defined', async () => {
@@ -72,6 +72,20 @@ describe('AuthService::', () => {
         remember: true,
       });
       expect(mockClaim.token).toEqual(mockToken);
+    });
+
+    it('Should return token with expiration if remember is falsy', async () => {
+      service['jwtExpiry'] = 100;
+      const jwtSignerSpy = jest.spyOn(jwtService, 'sign');
+      await service.login({
+        email: mockUser.email,
+        password,
+        remember: false,
+      });
+      expect(jwtSignerSpy).toHaveBeenCalledTimes(1);
+      expect(jwtSignerSpy.mock.calls[0][0]['sub']).toEqual(id);
+      expect(jwtSignerSpy.mock.calls[0][0]['email']).toEqual(mockUser.email);
+      expect(jwtSignerSpy.mock.calls[0][1]['expiresIn']).toEqual(100);
     });
 
     it('Should throw error if user not found', async () => {
