@@ -60,10 +60,6 @@ describe('AuthService::', () => {
     jwtService = module.get<JwtService>(JwtService);
   });
 
-  it('should be defined', async () => {
-    expect(service).toBeTruthy();
-  });
-
   describe('Login::', () => {
     it('Should login and return token', async () => {
       const mockClaim = await service.login({
