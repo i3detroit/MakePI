@@ -95,6 +95,7 @@ export class AuthService {
    * @returns - JWT Token
    */
   async register(data: Register): Promise<AuthReturn> {
+    // TODO: Error handlers
     const user = await this.usersService.create(data);
     const token: string = this.jwtService.sign(
       {
