@@ -1,10 +1,5 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
-import {
-  Claim,
-  ClaimVerifyResult,
-  failedLoginMessages,
-  FailedLoginReasons,
-} from './auth.interface';
+import { Injectable } from '@nestjs/common';
+import { Claim, ClaimVerifyResult } from './auth.interface';
 import { JwtService } from '@nestjs/jwt';
 
 /**
@@ -21,17 +16,11 @@ export class JwtStrategy {
    * @returns - True if JWT is valid
    */
   public async validate(request): Promise<boolean> {
-    try {
-      const result = await this._handler(request);
-      if (result.isValid) {
-        request.user = result.claim;
-      }
-      return result.isValid;
-    } catch (err) {
-      throw new UnauthorizedException({
-        message: [failedLoginMessages[err.message]],
-      });
+    const result = await this._handler(request);
+    if (result.isValid) {
+      request.user = result.claim;
     }
+    return result.isValid;
   }
 
   /**
@@ -49,12 +38,6 @@ export class JwtStrategy {
         '$1'
       );
       const claim = await this.jwtService.verify<Claim>(token);
-      const currentEpoch = Math.floor(new Date().valueOf() / 1000);
-
-      if (claim.exp && currentEpoch > claim.exp) {
-        throw new Error(FailedLoginReasons.JWT_EXPIRED);
-      }
-
       result = {
         claim,
         isValid: true,
