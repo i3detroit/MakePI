@@ -4,7 +4,7 @@
 
 > Make sure docker is installed. Docker Desktop is recommended.
 
-Run `npm run docker:build` to generate the developer docker image.
+Run `docker build -t makepi .` to generate the developer docker image.
 
 In the Command Palette, select `Remote-Containers: Open Folder in Container ...`
 
