@@ -1,3 +1,5 @@
-export function globalConfig(): string {
-  return 'global-config';
+export enum Role {
+  ADMIN,
+  MEMBER,
+  ONBOARDING,
 }
