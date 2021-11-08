@@ -1,7 +1,14 @@
-import { Entity, Column, PrimaryGeneratedColumn, Index } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  Index,
+  OneToMany,
+} from 'typeorm';
+import { AccessEntity } from './access.entity';
 
 @Entity()
-export class User {
+export class UserEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -27,4 +34,7 @@ export class User {
 
   @Column({ length: 36, nullable: true })
   verificationCode: string;
+
+  @OneToMany(() => AccessEntity, (access) => access.user)
+  access: AccessEntity[];
 }
