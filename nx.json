@@ -20,6 +20,7 @@
     "database": { "tags": [] },
     "models-users": { "tags": [] },
     "auth": { "tags": [] },
-    "bcrypt": { "tags": [] }
+    "bcrypt": { "tags": [] },
+    "global-config": { "tags": [] }
   }
 }

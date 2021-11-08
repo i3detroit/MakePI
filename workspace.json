@@ -1,8 +1,6 @@
 {
   "version": 2,
-  "cli": {
-    "defaultCollection": "@nrwl/nest"
-  },
+  "cli": { "defaultCollection": "@nrwl/nest" },
   "defaultProject": "make-pi",
   "projects": {
     "make-pi": {
@@ -35,15 +33,11 @@
         },
         "serve": {
           "executor": "@nrwl/node:execute",
-          "options": {
-            "buildTarget": "make-pi:build"
-          }
+          "options": { "buildTarget": "make-pi:build" }
         },
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["apps/make-pi/**/*.ts"]
-          }
+          "options": { "lintFilePatterns": ["apps/make-pi/**/*.ts"] }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
@@ -62,9 +56,7 @@
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["libs/shared/database/**/*.ts"]
-          }
+          "options": { "lintFilePatterns": ["libs/shared/database/**/*.ts"] }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
@@ -83,9 +75,7 @@
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["libs/models/users/**/*.ts"]
-          }
+          "options": { "lintFilePatterns": ["libs/models/users/**/*.ts"] }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
@@ -104,9 +94,7 @@
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["libs/shared/auth/**/*.ts"]
-          }
+          "options": { "lintFilePatterns": ["libs/shared/auth/**/*.ts"] }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
@@ -125,15 +113,32 @@
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["libs/shared/bcrypt/**/*.ts"]
-          }
+          "options": { "lintFilePatterns": ["libs/shared/bcrypt/**/*.ts"] }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
           "outputs": ["coverage/libs/shared/bcrypt"],
           "options": {
             "jestConfig": "libs/shared/bcrypt/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "global-config": {
+      "root": "libs/global-config",
+      "sourceRoot": "libs/global-config/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": { "lintFilePatterns": ["libs/global-config/**/*.ts"] }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/global-config"],
+          "options": {
+            "jestConfig": "libs/global-config/jest.config.js",
             "passWithNoTests": true
           }
         }
