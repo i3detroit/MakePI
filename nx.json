@@ -21,7 +21,6 @@
     "models-users": { "tags": [] },
     "auth": { "tags": [] },
     "bcrypt": { "tags": [] },
-    "global-config": { "tags": [] },
     "roles": { "tags": [] }
   }
 }
