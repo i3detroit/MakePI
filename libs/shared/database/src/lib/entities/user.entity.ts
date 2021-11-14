@@ -5,7 +5,7 @@ import {
   Index,
   OneToMany,
 } from 'typeorm';
-import { Access } from './access.entity';
+import { Role } from './roles.entity';
 
 @Entity()
 export class User {
@@ -35,6 +35,6 @@ export class User {
   @Column({ length: 36, nullable: true })
   verificationCode: string;
 
-  @OneToMany(() => Access, (access) => access.user)
-  access: Access[];
+  @OneToMany(() => Role, (role) => role.user)
+  roles: Role[];
 }

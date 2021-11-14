@@ -1,11 +1,10 @@
 import { Injectable, Inject } from '@nestjs/common';
-import { Repository, UpdateResult } from 'typeorm';
-import { Access, User } from '@make-pi/shared/database';
+import { In, Repository, UpdateResult } from 'typeorm';
+import { Role, User } from '@make-pi/shared/database';
 import { BcryptService } from '@make-pi/shared/bcrypt';
 import { CreateUser, ReturnCreatedUser, UpdateUser } from './users.interface';
 import { ConfigService } from '@nestjs/config';
-import { Role } from '@make-pi/global-config';
-import { UserErrors } from '..';
+import { AppRoles } from '@make-pi/roles';
 
 @Injectable()
 export class UsersService {
@@ -17,6 +16,8 @@ export class UsersService {
   constructor(
     @Inject('USER_REPOSITORY')
     private userRepository: Repository<User>,
+    @Inject('ROLE_REPOSITORY')
+    private roleRepository: Repository<Role>,
     private bcryptService: BcryptService,
     private configService: ConfigService
   ) {}
@@ -64,13 +65,15 @@ export class UsersService {
     return await this.userRepository.update(id, data);
   }
 
-  async addAccess(id: string, role: Role) {
+  async addRole(id: string, appRole: AppRoles) {
     const user = await this.findOneById(id);
-    if (!user) throw new Error(UserErrors.USER_NOT_FOUND);
-    const access = new Access();
-    access.role = role;
-    access.user = user;
-    user.access.push(access);
-    await this.userRepository.save(user);
+    const role = new Role();
+    role.role = appRole;
+    role.user = user;
+    return await this.roleRepository.save(role);
+  }
+
+  getRoles(id: string) {
+    return this.userRepository.findOne(id, { relations: ['roles'] });
   }
 }

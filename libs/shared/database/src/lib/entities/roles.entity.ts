@@ -6,17 +6,16 @@ import {
   Unique,
 } from 'typeorm';
 import { User } from './user.entity';
-import { Role } from '@make-pi/global-config';
 
 @Entity()
-@Unique('access_index', ['role', 'user'])
-export class Access {
+@Unique('roles_index', ['role', 'user'])
+export class Role {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column('int')
-  role: Role;
+  @Column({ length: 36 })
+  role: string;
 
-  @ManyToOne(() => User, (user) => user.access)
+  @ManyToOne(() => User, (user) => user.roles)
   user: User;
 }

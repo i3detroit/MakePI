@@ -21,10 +21,16 @@ export class JwtStrategy {
    */
   public async validate(request): Promise<boolean> {
     const result = await this._handler(request);
-    const user = await this.usersService.findOneById(result.claim.sub);
-    console.log(user);
     if (result.isValid) {
-      request.user = result.claim;
+      const user = await this.usersService.getRoles(result.claim.sub);
+      if (user) {
+        request.user = {
+          ...result.claim,
+          roles: user.roles.map((n) => n.role),
+        };
+        return result.isValid;
+      }
+      return false;
     }
     return result.isValid;
   }

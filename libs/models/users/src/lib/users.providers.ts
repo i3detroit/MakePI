@@ -1,5 +1,5 @@
 import { Connection } from 'typeorm';
-import { User, Access } from '@make-pi/shared/database';
+import { User, Role } from '@make-pi/shared/database';
 
 export const userProviders = [
   {
@@ -8,8 +8,8 @@ export const userProviders = [
     inject: ['DATABASE_CONNECTION'],
   },
   {
-    provide: 'ACCESS_REPOSITORY',
-    useFactory: (connection: Connection) => connection.getRepository(Access),
+    provide: 'ROLE_REPOSITORY',
+    useFactory: (connection: Connection) => connection.getRepository(Role),
     inject: ['DATABASE_CONNECTION'],
   },
 ];
