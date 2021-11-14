@@ -22,6 +22,7 @@
     "auth": { "tags": [] },
     "bcrypt": { "tags": [] },
     "global-config": { "tags": [] },
-    "access": { "tags": [] }
+    "access": { "tags": [] },
+    "roles": { "tags": [] }
   }
 }

@@ -7,5 +7,6 @@ module.exports = {
     '<rootDir>/libs/shared/bcrypt',
     '<rootDir>/libs/global-config',
     '<rootDir>/libs/shared/access',
+    '<rootDir>/libs/roles',
   ],
 };
