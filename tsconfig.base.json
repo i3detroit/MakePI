@@ -20,7 +20,6 @@
       "@make-pi/shared/auth": ["libs/shared/auth/src/index.ts"],
       "@make-pi/shared/bcrypt": ["libs/shared/bcrypt/src/index.ts"],
       "@make-pi/global-config": ["libs/global-config/src/index.ts"],
-      "@make-pi/shared/access": ["libs/shared/access/src/index.ts"],
       "@make-pi/roles": ["libs/roles/src/index.ts"]
     }
   },

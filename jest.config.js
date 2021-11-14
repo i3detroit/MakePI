@@ -6,7 +6,6 @@ module.exports = {
     '<rootDir>/libs/shared/auth',
     '<rootDir>/libs/shared/bcrypt',
     '<rootDir>/libs/global-config',
-    '<rootDir>/libs/shared/access',
     '<rootDir>/libs/roles',
   ],
 };

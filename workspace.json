@@ -144,25 +144,6 @@
         }
       }
     },
-    "access": {
-      "root": "libs/shared/access",
-      "sourceRoot": "libs/shared/access/src",
-      "projectType": "library",
-      "targets": {
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "options": { "lintFilePatterns": ["libs/shared/access/**/*.ts"] }
-        },
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/shared/access"],
-          "options": {
-            "jestConfig": "libs/shared/access/jest.config.js",
-            "passWithNoTests": true
-          }
-        }
-      }
-    },
     "roles": {
       "root": "libs/roles",
       "sourceRoot": "libs/roles/src",
