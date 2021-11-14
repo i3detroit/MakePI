@@ -6,6 +6,6 @@ import { AccessStrategy } from './access.strategy';
 @Module({
   controllers: [],
   providers: [AccessService, AccessGuard, AccessStrategy],
-  exports: [AccessStrategy, AccessGuard],
+  exports: [AccessService, AccessGuard, AccessStrategy],
 })
-export class SharedAccessModule {}
+export class AccessModule {}
