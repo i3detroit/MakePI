@@ -5,10 +5,10 @@ import {
   Index,
   OneToMany,
 } from 'typeorm';
-import { AccessEntity } from './access.entity';
+import { Access } from './access.entity';
 
 @Entity()
-export class UserEntity {
+export class User {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -35,6 +35,6 @@ export class UserEntity {
   @Column({ length: 36, nullable: true })
   verificationCode: string;
 
-  @OneToMany(() => AccessEntity, (access) => access.user)
-  access: AccessEntity[];
+  @OneToMany(() => Access, (access) => access.user)
+  access: Access[];
 }
