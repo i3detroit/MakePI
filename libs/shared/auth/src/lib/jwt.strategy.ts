@@ -1,13 +1,17 @@
 import { Injectable } from '@nestjs/common';
 import { Claim, ClaimVerifyResult } from './auth.interface';
 import { JwtService } from '@nestjs/jwt';
+import { UsersService } from '@make-pi/models/users';
 
 /**
  * JWT Strategy for AuthGuard
  */
 @Injectable()
 export class JwtStrategy {
-  constructor(private jwtService: JwtService) {}
+  constructor(
+    private jwtService: JwtService,
+    private usersService: UsersService
+  ) {}
 
   /**
    * Validate JWT in Request
@@ -17,6 +21,8 @@ export class JwtStrategy {
    */
   public async validate(request): Promise<boolean> {
     const result = await this._handler(request);
+    const user = await this.usersService.findOneById(result.claim.sub);
+    console.log(user);
     if (result.isValid) {
       request.user = result.claim;
     }

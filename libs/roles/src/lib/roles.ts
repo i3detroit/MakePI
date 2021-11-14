@@ -10,4 +10,5 @@ roles
   .grant(AppRoles.ADMIN_ACCESS)
   .createAny('user')
   .updateAny('user')
-  .deleteAny('user');
+  .deleteAny('user')
+  .readAny('user');
