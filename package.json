@@ -38,6 +38,7 @@
     "class-validator": "^0.13.1",
     "moment-timezone": "^0.5.33",
     "mysql": "^2.18.1",
+    "nest-access-control": "^2.0.2",
     "reflect-metadata": "^0.1.13",
     "rxjs": "~6.6.3",
     "tslib": "^2.0.0",
