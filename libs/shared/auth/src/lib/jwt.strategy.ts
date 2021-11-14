@@ -22,7 +22,7 @@ export class JwtStrategy {
   public async validate(request): Promise<boolean> {
     const result = await this._handler(request);
     if (result.isValid) {
-      const user = await this.usersService.getRoles(result.claim.sub);
+      const user = await this.usersService.findOneById(result.claim.sub);
       if (user) {
         request.user = {
           ...result.claim,

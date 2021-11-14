@@ -22,6 +22,7 @@ import {
   UnauthorizedException,
   UseGuards,
 } from '@nestjs/common';
+import { ACGuard, UseRoles } from 'nest-access-control';
 
 @Controller('auth')
 export class AuthController {
@@ -64,7 +65,12 @@ export class AuthController {
   }
 
   @Put('/password')
-  @UseGuards(AuthGuard)
+  @UseGuards(AuthGuard, ACGuard)
+  @UseRoles({
+    resource: 'user',
+    action: 'update',
+    possession: 'own',
+  })
   @UsePipes(new ValidationPipe())
   async changePassword(
     @Body() body: ChangePasswordDto,

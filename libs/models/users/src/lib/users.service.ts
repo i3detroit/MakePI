@@ -1,5 +1,5 @@
 import { Injectable, Inject } from '@nestjs/common';
-import { In, Repository, UpdateResult } from 'typeorm';
+import { DeleteResult, Repository, UpdateResult } from 'typeorm';
 import { Role, User } from '@make-pi/shared/database';
 import { BcryptService } from '@make-pi/shared/bcrypt';
 import { CreateUser, ReturnCreatedUser, UpdateUser } from './users.interface';
@@ -31,11 +31,14 @@ export class UsersService {
   }
 
   findOneById(id: string): Promise<User> {
-    return this.userRepository.findOne(id);
+    return this.userRepository.findOne(id, { relations: ['roles'] });
   }
 
   findOneByEmail(email: string): Promise<User> {
-    return this.userRepository.findOne({ email: email.toLowerCase() });
+    return this.userRepository.findOne(
+      { email: email.toLowerCase() },
+      { relations: ['roles'] }
+    );
   }
 
   async create(data: CreateUser): Promise<ReturnCreatedUser> {
@@ -66,14 +69,18 @@ export class UsersService {
   }
 
   async addRole(id: string, appRole: AppRoles) {
-    const user = await this.findOneById(id);
+    const user = await this.userRepository.findOne(id);
     const role = new Role();
     role.role = appRole;
     role.user = user;
     return await this.roleRepository.save(role);
   }
 
-  getRoles(id: string) {
-    return this.userRepository.findOne(id, { relations: ['roles'] });
+  async removeRole(id: string, appRole: AppRoles): Promise<DeleteResult> {
+    const user = await this.userRepository.findOne(id, {
+      relations: ['roles'],
+    });
+    const [role] = user.roles.filter((n) => n.role === appRole);
+    return this.roleRepository.delete(role);
   }
 }
