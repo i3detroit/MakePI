@@ -1,9 +1,11 @@
 import { Injectable, Inject } from '@nestjs/common';
 import { Repository, UpdateResult } from 'typeorm';
-import { User } from '@make-pi/shared/database';
+import { Access, User } from '@make-pi/shared/database';
 import { BcryptService } from '@make-pi/shared/bcrypt';
 import { CreateUser, ReturnCreatedUser, UpdateUser } from './users.interface';
 import { ConfigService } from '@nestjs/config';
+import { Role } from '@make-pi/global-config';
+import { UserErrors } from '..';
 
 @Injectable()
 export class UsersService {
@@ -60,5 +62,15 @@ export class UsersService {
       data.password = hash;
     }
     return await this.userRepository.update(id, data);
+  }
+
+  async addAccess(id: string, role: Role) {
+    const user = await this.findOneById(id);
+    if (!user) throw new Error(UserErrors.USER_NOT_FOUND);
+    const access = new Access();
+    access.role = role;
+    access.user = user;
+    user.access.push(access);
+    await this.userRepository.save(user);
   }
 }

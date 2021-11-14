@@ -18,3 +18,7 @@ export interface ReturnCreatedUser {
   email: string;
   active: boolean;
 }
+
+export enum UserErrors {
+  USER_NOT_FOUND = 'USER_NOT_FOUND',
+}
