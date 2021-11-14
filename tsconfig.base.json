@@ -19,7 +19,8 @@
       "@make-pi/models/users": ["libs/models/users/src/index.ts"],
       "@make-pi/shared/auth": ["libs/shared/auth/src/index.ts"],
       "@make-pi/shared/bcrypt": ["libs/shared/bcrypt/src/index.ts"],
-      "@make-pi/global-config": ["libs/global-config/src/index.ts"]
+      "@make-pi/global-config": ["libs/global-config/src/index.ts"],
+      "@make-pi/shared/access": ["libs/shared/access/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
