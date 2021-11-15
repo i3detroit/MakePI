@@ -1,5 +1,6 @@
 {
   "dockerComposeFile": ["../docker-compose.yml"],
+  "postStartCommand": "npm i",
   "service": "dev",
   "workspaceFolder": "/src",
   "extensions": [
@@ -13,7 +14,7 @@
     "ms-azuretools.vscode-docker"
   ],
   "settings": {
-    "telemetry.enableCrashReporter": false,
+    "telemetry.telemetryLevel": "off",
     "telemetry.enableTelemetry": false,
     "editor.tabSize": 2,
     "editor.formatOnSave": true,
