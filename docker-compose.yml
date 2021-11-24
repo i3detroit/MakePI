@@ -1,7 +1,7 @@
-version: "3.8"
+version: '3.8'
 services:
   dev:
-    image: makepi
+    build: ./
     command: sh -c "tail -f /dev/null"
     working_dir: /src
     volumes:

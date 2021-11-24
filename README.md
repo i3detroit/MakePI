@@ -2,9 +2,7 @@
 
 ## Quick Start with VS Code
 
-> Make sure docker is installed. Docker Desktop is recommended.
-
-Run `npm run docker:build` to generate the developer docker image.
+> Make sure docker and docker-compose is installed. Docker Desktop is recommended.
 
 In the Command Palette, select `Remote-Containers: Open Folder in Container ...`
 

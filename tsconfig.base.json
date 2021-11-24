@@ -14,7 +14,13 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@make-pi/shared/database": ["libs/shared/database/src/index.ts"],
+      "@make-pi/models/users": ["libs/models/users/src/index.ts"],
+      "@make-pi/shared/auth": ["libs/shared/auth/src/index.ts"],
+      "@make-pi/shared/bcrypt": ["libs/shared/bcrypt/src/index.ts"],
+      "@make-pi/roles": ["libs/roles/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
