@@ -4,12 +4,20 @@ import {
   UserIdDto,
   UsersService,
 } from '@make-pi/models/users';
-import { AuthGuard, RegisterUserDto } from '@make-pi/shared/auth';
+import {
+  AuthGuard,
+  changeRoleErrors,
+  createUserErrors,
+  RegisterUserDto,
+} from '@make-pi/shared/auth';
 import { Role, User } from '@make-pi/shared/database';
 import {
+  BadRequestException,
   Body,
+  ConflictException,
   Controller,
   Get,
+  NotFoundException,
   Param,
   Post,
   UseGuards,
@@ -32,8 +40,19 @@ export class UserController {
     possession: 'any',
   })
   @UsePipes(new ValidationPipe())
-  createUser(@Body() body: RegisterUserDto): Promise<ReturnCreatedUser> {
-    return this.usersService.create(body);
+  async createUser(@Body() body: RegisterUserDto): Promise<ReturnCreatedUser> {
+    try {
+      return await this.usersService.create(body);
+    } catch (err) {
+      switch (err.code) {
+        case 'ER_DUP_ENTRY':
+          throw new ConflictException({
+            message: [createUserErrors.DUPLICATE_USER_ID],
+          });
+        default:
+          throw new BadRequestException({ message: [err.message] });
+      }
+    }
   }
 
   @Post(':id/add-role')
@@ -44,8 +63,22 @@ export class UserController {
     possession: 'any',
   })
   @UsePipes(new ValidationPipe())
-  addRole(@Param() param: UserIdDto, @Body() body: AddRoleDto): Promise<Role> {
-    return this.usersService.addRole(param.id, body.role);
+  async addRole(
+    @Param() param: UserIdDto,
+    @Body() body: AddRoleDto
+  ): Promise<Role> {
+    try {
+      return await this.usersService.addRole(param.id, body.role);
+    } catch (err) {
+      switch (err.code) {
+        case 'ER_DUP_ENTRY':
+          throw new ConflictException({
+            message: [changeRoleErrors.DUPLICATE_ROLE],
+          });
+        default:
+          throw new BadRequestException({ message: [err.message] });
+      }
+    }
   }
 
   @Post(':id/remove-role')
@@ -56,11 +89,18 @@ export class UserController {
     possession: 'any',
   })
   @UsePipes(new ValidationPipe())
-  removeRole(
+  async removeRole(
     @Param() param: UserIdDto,
     @Body() body: AddRoleDto
   ): Promise<DeleteResult> {
-    return this.usersService.removeRole(param.id, body.role);
+    try {
+      return await this.usersService.removeRole(param.id, body.role);
+    } catch (err) {
+      switch (err.code) {
+        default:
+          throw new BadRequestException({ message: [err.message] });
+      }
+    }
   }
 
   @Get(':id')
@@ -71,7 +111,16 @@ export class UserController {
     possession: 'any',
   })
   @UsePipes(new ValidationPipe())
-  get(@Param() param: UserIdDto): Promise<User> {
-    return this.usersService.findOneById(param.id);
+  async get(@Param() param: UserIdDto): Promise<User> {
+    try {
+      const user = await this.usersService.findOneById(param.id);
+      if (!user) throw new NotFoundException();
+      return user;
+    } catch (err) {
+      switch (err.code) {
+        default:
+          throw new BadRequestException({ message: [err.message] });
+      }
+    }
   }
 }

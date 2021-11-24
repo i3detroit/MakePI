@@ -161,3 +161,11 @@ export const failedLoginMessages = {
   INVALID_RECOVERY_CODE: 'Invalid recovery code',
   JWT_EXPIRED: 'Authorization expired',
 };
+
+export const createUserErrors = {
+  DUPLICATE_USER_ID: 'User already exists',
+};
+
+export const changeRoleErrors = {
+  DUPLICATE_ROLE: 'User already has this role',
+};
