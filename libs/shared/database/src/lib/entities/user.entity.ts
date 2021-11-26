@@ -4,8 +4,10 @@ import {
   PrimaryGeneratedColumn,
   Index,
   OneToMany,
+  OneToOne,
 } from 'typeorm';
-import { Role } from './roles.entity';
+import { PaymentSource } from './payment-source';
+import { Role } from './role.entity';
 
 @Entity()
 export class User {
@@ -37,4 +39,7 @@ export class User {
 
   @OneToMany(() => Role, (role) => role.user)
   roles: Role[];
+
+  @OneToOne(() => PaymentSource, (paymentSource) => paymentSource.user)
+  paymentSource: PaymentSource;
 }

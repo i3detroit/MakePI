@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { ModelsPaymentSourceService } from './models-payment-source.service';
+import { ModelsPaymentSourceService } from './payment-source.service';
 
 @Module({
   controllers: [],

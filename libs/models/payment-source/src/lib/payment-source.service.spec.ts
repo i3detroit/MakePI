@@ -1,5 +1,5 @@
 import { Test } from '@nestjs/testing';
-import { ModelsPaymentSourceService } from './models-payment-source.service';
+import { ModelsPaymentSourceService } from './payment-source.service';
 
 describe('ModelsPaymentSourceService', () => {
   let service: ModelsPaymentSourceService;

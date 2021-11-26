@@ -1,2 +1,2 @@
-export * from './lib/models-payment-source.module';
-export * from './lib/models-payment-source.service';
+export * from './lib/payment-source.module';
+export * from './lib/payment-source.service';
