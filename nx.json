@@ -22,6 +22,7 @@
     "auth": { "tags": [] },
     "bcrypt": { "tags": [] },
     "roles": { "tags": [] },
-    "global-config": { "tags": [] }
+    "global-config": { "tags": [] },
+    "models-payment-source": { "tags": [] }
   }
 }

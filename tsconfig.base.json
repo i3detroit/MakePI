@@ -20,7 +20,10 @@
       "@make-pi/shared/auth": ["libs/shared/auth/src/index.ts"],
       "@make-pi/shared/bcrypt": ["libs/shared/bcrypt/src/index.ts"],
       "@make-pi/roles": ["libs/roles/src/index.ts"],
-      "@make-pi/global-config": ["libs/global-config/src/index.ts"]
+      "@make-pi/global-config": ["libs/global-config/src/index.ts"],
+      "@make-pi/models/payment-source": [
+        "libs/models/payment-source/src/index.ts"
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]
