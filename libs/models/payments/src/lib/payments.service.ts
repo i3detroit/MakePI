@@ -1,7 +1,7 @@
 import { Payment, PaymentSource, User } from '@make-pi/shared/database';
 import { Inject, Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
-import { CreatePayment, UpdatePayment } from './payment.interface';
+import { CreatePayment, UpdatePayment } from './payments.interface';
 
 @Injectable()
 export class PaymentService {

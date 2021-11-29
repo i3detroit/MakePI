@@ -1,5 +1,5 @@
 import { Connection } from 'typeorm';
-import { PaymentSource, User, Payment } from '@make-pi/shared/database';
+import { PaymentSource } from '@make-pi/shared/database';
 
 export const paymentSourceProviders = [
   {

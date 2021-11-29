@@ -1,15 +1,15 @@
 import { Test } from '@nestjs/testing';
-import { PaymentService } from './payment.service';
+import { PaymentSourceService } from './payment-sources.service';
 
-describe('PaymentService', () => {
-  let service: PaymentService;
+describe('PaymentSourceService', () => {
+  let service: PaymentSourceService;
 
   beforeEach(async () => {
     const module = await Test.createTestingModule({
       providers: [
-        PaymentService,
+        PaymentSourceService,
         {
-          provide: 'PAYMENT_REPOSITORY',
+          provide: 'PAYMENT_SOURCE_REPOSITORY',
           useValue: {
             findOne: jest.fn(),
             find: jest.fn(),
@@ -20,7 +20,7 @@ describe('PaymentService', () => {
       ],
     }).compile();
 
-    service = module.get(PaymentService);
+    service = module.get(PaymentSourceService);
   });
 
   it('should be defined', () => {
