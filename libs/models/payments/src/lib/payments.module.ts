@@ -1,7 +1,7 @@
 import { DatabaseModule } from '@make-pi/shared/database';
 import { Module } from '@nestjs/common';
-import { paymentProviders } from './payment.providers';
-import { PaymentService } from './payment.service';
+import { paymentProviders } from './payments.providers';
+import { PaymentService } from './payments.service';
 
 @Module({
   imports: [DatabaseModule],
