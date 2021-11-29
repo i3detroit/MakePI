@@ -4,8 +4,8 @@ import {
   PrimaryGeneratedColumn,
   Index,
   OneToMany,
-  OneToOne,
 } from 'typeorm';
+import { Payment } from './payment';
 import { PaymentSource } from './payment-source';
 import { Role } from './role.entity';
 
@@ -40,6 +40,9 @@ export class User {
   @OneToMany(() => Role, (role) => role.user)
   roles: Role[];
 
-  @OneToOne(() => PaymentSource, (paymentSource) => paymentSource.user)
-  paymentSource: PaymentSource;
+  @OneToMany(() => PaymentSource, (paymentSource) => paymentSource.user)
+  paymentSources: PaymentSource[];
+
+  @OneToMany(() => Payment, (payment) => payment.user)
+  payments: Payment[];
 }

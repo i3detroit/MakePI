@@ -2,18 +2,13 @@ import {
   Column,
   Entity,
   Index,
-  OneToOne,
+  ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { PaymentMethod } from '@make-pi/global-config';
 import { User } from './user.entity';
-
-export interface PaymentSourceMetadata {
-  brand?: string;
-  last4?: string;
-  funding?: string;
-  bank_name?: string;
-}
+import { Payment } from './payment';
 
 @Entity()
 export class PaymentSource {
@@ -24,17 +19,23 @@ export class PaymentSource {
   @Index()
   method: PaymentMethod;
 
-  @OneToOne(() => User, (user) => user.paymentSource)
+  @ManyToOne(() => User, (user) => user.paymentSources)
   @Index()
   user: User;
+
+  @OneToMany(() => Payment, (payment) => payment.paymentSource)
+  payments: Payment[];
 
   @Column({ length: 1024 })
   @Index()
   sourceId: string;
 
   @Column({ type: 'json' })
-  metadata: PaymentSourceMetadata;
+  metadata;
 
   @Column('bool')
   verified: boolean;
+
+  @Column('bool')
+  enabled: boolean;
 }
