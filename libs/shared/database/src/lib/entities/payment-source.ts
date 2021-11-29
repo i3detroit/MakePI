@@ -6,7 +6,6 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { PaymentMethod } from '@make-pi/global-config';
 import { User } from './user.entity';
 import { Payment } from './payment';
 
@@ -17,7 +16,7 @@ export class PaymentSource {
 
   @Column({ length: 128 })
   @Index()
-  method: PaymentMethod;
+  method: string;
 
   @ManyToOne(() => User, (user) => user.paymentSources)
   @Index()

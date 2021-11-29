@@ -1,8 +1,8 @@
 import { Injectable, Inject } from '@nestjs/common';
-import { DeleteResult, Repository, UpdateResult } from 'typeorm';
+import { DeleteResult, Repository } from 'typeorm';
 import { Role, User } from '@make-pi/shared/database';
 import { BcryptService } from '@make-pi/shared/bcrypt';
-import { CreateUser, ReturnCreatedUser, UpdateUser } from './users.interface';
+import { CreateUser, UpdateUser } from './users.interface';
 import { ConfigService } from '@nestjs/config';
 import { AppRoles } from '@make-pi/roles';
 
@@ -41,7 +41,7 @@ export class UsersService {
     );
   }
 
-  async create(data: CreateUser): Promise<ReturnCreatedUser> {
+  async create(data: CreateUser): Promise<User> {
     const { email, password } = data;
     const salt = await this.bcryptService.genSalt(this.saltWorkFactor);
     const hash = await this.bcryptService.hash(password, salt);
@@ -49,14 +49,10 @@ export class UsersService {
     data.password = hash;
     const result = await this.userRepository.insert(data);
     const [generatedMap] = result.generatedMaps;
-    return {
-      id: generatedMap.id,
-      email: data.email,
-      active: generatedMap.active,
-    };
+    return generatedMap as User;
   }
 
-  async update(id: string, data: UpdateUser): Promise<UpdateResult> {
+  async update(id: string, data: UpdateUser): Promise<User> {
     if (data.email) {
       data.email = data.email.toLowerCase();
     }
@@ -65,10 +61,12 @@ export class UsersService {
       const hash = await this.bcryptService.hash(data.password, salt);
       data.password = hash;
     }
-    return await this.userRepository.update(id, data);
+    const result = await this.userRepository.update(id, data);
+    const [generatedMap] = result.generatedMaps;
+    return generatedMap as User;
   }
 
-  async addRole(id: string, appRole: AppRoles) {
+  async addRole(id: string, appRole: AppRoles): Promise<Role> {
     const user = await this.userRepository.findOne(id);
     const role = new Role();
     role.role = appRole;

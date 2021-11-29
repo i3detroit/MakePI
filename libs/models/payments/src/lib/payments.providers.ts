@@ -5,5 +5,6 @@ export const paymentProviders = [
   {
     provide: 'PAYMENT_REPOSITORY',
     useFactory: (connection: Connection) => connection.getRepository(Payment),
+    inject: ['DATABASE_CONNECTION'],
   },
 ];

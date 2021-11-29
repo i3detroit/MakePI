@@ -1,9 +1,4 @@
-import {
-  AddRoleDto,
-  ReturnCreatedUser,
-  UserIdDto,
-  UsersService,
-} from '@make-pi/models/users';
+import { AddRoleDto, UserIdDto, UsersService } from '@make-pi/models/users';
 import {
   AuthGuard,
   changeRoleErrors,
@@ -40,7 +35,7 @@ export class UserController {
     possession: 'any',
   })
   @UsePipes(new ValidationPipe())
-  async createUser(@Body() body: RegisterUserDto): Promise<ReturnCreatedUser> {
+  async createUser(@Body() body: RegisterUserDto): Promise<User> {
     try {
       return await this.usersService.create(body);
     } catch (err) {
