@@ -1,13 +1,13 @@
 import { Test } from '@nestjs/testing';
-import { PaymentService } from './payments.service';
+import { PaymentsService } from './payments.service';
 
 describe('PaymentService', () => {
-  let service: PaymentService;
+  let service: PaymentsService;
 
   beforeEach(async () => {
     const module = await Test.createTestingModule({
       providers: [
-        PaymentService,
+        PaymentsService,
         {
           provide: 'PAYMENT_REPOSITORY',
           useValue: {
@@ -20,7 +20,7 @@ describe('PaymentService', () => {
       ],
     }).compile();
 
-    service = module.get(PaymentService);
+    service = module.get(PaymentsService);
   });
 
   it('should be defined', () => {

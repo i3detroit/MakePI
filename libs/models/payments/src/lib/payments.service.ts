@@ -4,7 +4,7 @@ import { Repository } from 'typeorm';
 import { CreatePayment, UpdatePayment } from './payments.interface';
 
 @Injectable()
-export class PaymentService {
+export class PaymentsService {
   constructor(
     @Inject('PAYMENT_REPOSITORY')
     private paymentRepository: Repository<Payment>

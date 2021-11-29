@@ -5,7 +5,7 @@ import { UpdatePaymentSource } from '..';
 import { CreatePaymentSource } from './payment-sources.interface';
 
 @Injectable()
-export class PaymentSourceService {
+export class PaymentSourcesService {
   constructor(
     @Inject('PAYMENT_SOURCE_REPOSITORY')
     private paymentSourceRepository: Repository<PaymentSource>

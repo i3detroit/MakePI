@@ -7,9 +7,24 @@ import { AccessControlModule } from 'nest-access-control';
 
 import { roles } from '@make-pi/roles';
 import { UsersModule } from '@make-pi/models/users';
+import { PaymentController } from './payment/payment.controller';
+import { PaymentsModule } from '@make-pi/models/payments';
+import { PaymentSourcesModule } from '@make-pi/models/payment-sources';
+import { PaymentSourceController } from './payment-source/payment-source.controller';
 
 @Module({
-  imports: [AuthModule, UsersModule, AccessControlModule.forRoles(roles)],
-  controllers: [AuthController, UserController],
+  imports: [
+    AuthModule,
+    UsersModule,
+    PaymentsModule,
+    PaymentSourcesModule,
+    AccessControlModule.forRoles(roles),
+  ],
+  controllers: [
+    AuthController,
+    UserController,
+    PaymentController,
+    PaymentSourceController,
+  ],
 })
 export class AppModule {}
