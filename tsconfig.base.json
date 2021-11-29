@@ -23,7 +23,8 @@
       "@make-pi/global-config": ["libs/global-config/src/index.ts"],
       "@make-pi/models/payment-source": [
         "libs/models/payment-source/src/index.ts"
-      ]
+      ],
+      "@make-pi/models/payment": ["libs/models/payment/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

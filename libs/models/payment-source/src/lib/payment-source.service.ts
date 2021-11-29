@@ -5,7 +5,7 @@ import { UpdatePaymentSource } from '..';
 import { CreatePaymentSource } from './payment-source.interface';
 
 @Injectable()
-export class ModelsPaymentSourceService {
+export class PaymentSourceService {
   constructor(
     @Inject('PAYMENT_SOURCE_REPOSITORY')
     private paymentSourceRepository: Repository<PaymentSource>
@@ -24,9 +24,9 @@ export class ModelsPaymentSourceService {
   async create(data: CreatePaymentSource): Promise<PaymentSource> {
     const user = new User();
     user.id = data.userId;
-    const payment = new PaymentSource();
+    const paymentSource = new PaymentSource();
     const result = await this.paymentSourceRepository.insert(
-      Object.assign(payment, {
+      Object.assign(paymentSource, {
         method: data.method,
         sourceId: data.sourceId,
         verified: data.verified,

@@ -1,7 +1,5 @@
 import { createConnection } from 'typeorm';
-import { User } from './entities/user.entity';
-import { Role } from './entities/role.entity';
-import { PaymentSource } from './entities/payment-source';
+import { User, Role, PaymentSource, Payment } from '..';
 
 export const databaseProviders = [
   {
@@ -14,7 +12,7 @@ export const databaseProviders = [
         username: process.env.TYPEORM_USER,
         password: process.env.TYPEORM_PASSWORD,
         database: process.env.TYPEORM_DATABASE,
-        entities: [User, Role, PaymentSource],
+        entities: [User, Role, PaymentSource, Payment],
         synchronize: true,
       }),
   },

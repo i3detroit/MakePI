@@ -8,5 +8,6 @@ module.exports = {
     '<rootDir>/libs/roles',
     '<rootDir>/libs/global-config',
     '<rootDir>/libs/models/payment-source',
+    '<rootDir>/libs/models/payment',
   ],
 };

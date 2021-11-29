@@ -19,7 +19,6 @@ export interface PaymentStatusHistory {
   status: PaymentStatus;
   metadata?;
 }
-
 @Entity()
 export class Payment {
   @PrimaryGeneratedColumn('uuid')

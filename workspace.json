@@ -237,6 +237,31 @@
           }
         }
       }
+    },
+    "models-payment": {
+      "root": "libs/models/payment",
+      "sourceRoot": "libs/models/payment/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/models/payment/**/*.ts"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/models/payment"
+          ],
+          "options": {
+            "jestConfig": "libs/models/payment/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   }
 }
