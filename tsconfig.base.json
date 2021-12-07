@@ -24,7 +24,8 @@
       "@make-pi/models/payment-sources": [
         "libs/models/payment-sources/src/index.ts"
       ],
-      "@make-pi/models/payments": ["libs/models/payments/src/index.ts"]
+      "@make-pi/models/payments": ["libs/models/payments/src/index.ts"],
+      "@make-pi/shared/stripe": ["libs/shared/stripe/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

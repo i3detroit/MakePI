@@ -24,6 +24,7 @@
     "roles": { "tags": [] },
     "global-config": { "tags": [] },
     "models-payment-sources": { "tags": [] },
-    "models-payments": { "tags": [] }
+    "models-payments": { "tags": [] },
+    "shared-stripe": { "tags": [] }
   }
 }

@@ -9,5 +9,6 @@ module.exports = {
     '<rootDir>/libs/global-config',
     '<rootDir>/libs/models/payment-sources',
     '<rootDir>/libs/models/payments',
+    '<rootDir>/libs/shared/stripe',
   ],
 };
