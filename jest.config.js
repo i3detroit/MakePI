@@ -10,5 +10,6 @@ module.exports = {
     '<rootDir>/libs/models/payment-sources',
     '<rootDir>/libs/models/payments',
     '<rootDir>/libs/shared/stripe',
+    '<rootDir>/apps/infrastructure',
   ],
 };

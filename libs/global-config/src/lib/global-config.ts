@@ -1,3 +1,8 @@
+export enum EnvNames {
+  DEV = 'dev',
+  PROD = 'prod',
+}
+
 export enum PaymentMethod {
   STRIPE_CC = 'STRIPE_CREDIT_CARD',
   STRIPE_ACH = 'STRIPE_ACH',

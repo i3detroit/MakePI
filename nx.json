@@ -25,6 +25,7 @@
     "global-config": { "tags": [] },
     "models-payment-sources": { "tags": [] },
     "models-payments": { "tags": [] },
-    "shared-stripe": { "tags": [] }
+    "shared-stripe": { "tags": [] },
+    "infrastructure": { "tags": [] }
   }
 }

@@ -48,6 +48,8 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
+    "@aws-cdk/core": "1.134.0",
+    "@aws-cdk/pipelines": "^1.134.0",
     "@nestjs/schematics": "^7.0.0",
     "@nestjs/testing": "^7.0.0",
     "@nrwl/cli": "11.6.3",
@@ -63,6 +65,7 @@
     "@types/node": "14.14.33",
     "@typescript-eslint/eslint-plugin": "4.3.0",
     "@typescript-eslint/parser": "4.3.0",
+    "aws-cdk": "1.134.0",
     "dotenv": "8.2.0",
     "eslint": "7.10.0",
     "eslint-config-prettier": "8.1.0",
