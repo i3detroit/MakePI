@@ -4,5 +4,5 @@ export const environment = {
   githubPatSecret: 'GITHUB_PAT',
   owner: 'i3detroit',
   repo: 'MakePI',
-  branch: 'main',
+  branch: 'feature/payments',
 };

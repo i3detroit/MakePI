@@ -6,7 +6,10 @@ COPY .devcontainer/bashrc.sh /root/.bashrc
 COPY .devcontainer/profile.sh /root/.profile
 
 RUN apt-get update \
-  && apt-get -y upgrade \
-  && apt-get install -y curl build-essential vim nano git \
+  && apt-get install -y curl build-essential vim nano git unzip \
   && curl -sL https://deb.nodesource.com/setup_14.x | bash - \
   && apt-get install -y nodejs
+
+RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" \
+  && unzip awscliv2.zip \
+  && ./aws/install

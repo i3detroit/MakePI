@@ -227,6 +227,44 @@
       "sourceRoot": "apps/infrastructure/src",
       "projectType": "application",
       "targets": {
+        "bootstrap": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "cwd": "apps/infrastructure",
+            "profile": "makepi-pipelines",
+            "cloudformation-execution-policies": "arn:aws:iam::aws:policy/AdministratorAccess aws://{{AccountId}}/{{Region}}",
+            "command": "cdk bootstrap"
+          }
+        },
+        "synth": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "cwd": "apps/infrastructure",
+            "command": "cdk synth",
+            "lookups": false,
+            "strict": true,
+            "app": "'ts-node -r tsconfig-paths/register src/main.ts'"
+          },
+          "outputs": ["dist/apps/global-infrastructure"]
+        },
+        "deploy": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "cwd": "apps/infrastructure",
+            "command": "cdk deploy --all",
+            "profile": "makepi-pipelines",
+            "app": "'ts-node -r tsconfig-paths/register src/main.ts'"
+          }
+        },
+        "destroy": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "cwd": "apps/infrastructure",
+            "command": "cdk destroy --all",
+            "profile": "makepi-pipelines",
+            "app": "'ts-node -r tsconfig-paths/register src/main.ts'"
+          }
+        },
         "build": {
           "executor": "@nrwl/node:build",
           "outputs": ["{options.outputPath}"],

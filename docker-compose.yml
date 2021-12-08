@@ -8,6 +8,7 @@ services:
       - ./:/src:delegated
       - /src/node_modules
       - ~/.ssh:/root/.ssh:ro
+      - ~/.aws:/root/.aws:ro
     ports:
       - 8888:8888
   database:
