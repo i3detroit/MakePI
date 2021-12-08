@@ -27,11 +27,7 @@ export class PipelinesStack extends Stack {
 
     const synth = new ShellStep('Synth', {
       input,
-      commands: [
-        'npm ci',
-        'npm run nx run infrastructure:build',
-        'npm run nx run infrastructure:synth',
-      ],
+      commands: ['npm ci', 'npm run nx run infrastructure:synth'],
       primaryOutputDirectory: 'dist/apps/infrastructure',
     });
 
