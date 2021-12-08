@@ -4,7 +4,7 @@ import { environment } from './environments/environment';
 import { PipelinesStack } from './stacks/pipelines/pipelines-stack';
 
 const app = new cdk.App();
-new PipelinesStack(app, 'the-apostles-pipelines', {
+new PipelinesStack(app, 'PipelinesStack', {
   env: {
     region: environment.pipelinesRegion,
   },
