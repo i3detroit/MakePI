@@ -10,6 +10,7 @@
     "models-payment-sources": "libs/models/payment-sources",
     "models-payments": "libs/models/payments",
     "models-users": "libs/models/users",
+    "payment-methods": "libs/payment-methods",
     "roles": "libs/roles",
     "shared-aws-secrets-manager": "libs/shared/aws/secrets-manager",
     "shared-secrets": "libs/shared/secrets",

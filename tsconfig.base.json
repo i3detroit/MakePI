@@ -21,6 +21,7 @@
       ],
       "@make-pi/models/payments": ["libs/models/payments/src/index.ts"],
       "@make-pi/models/users": ["libs/models/users/src/index.ts"],
+      "@make-pi/payment-methods": ["libs/payment-methods/src/index.ts"],
       "@make-pi/roles": ["libs/roles/src/index.ts"],
       "@make-pi/shared/auth": ["libs/shared/auth/src/index.ts"],
       "@make-pi/shared/aws/secrets-manager": [
