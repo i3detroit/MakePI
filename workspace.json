@@ -11,6 +11,7 @@
     "models-payments": "libs/models/payments",
     "models-users": "libs/models/users",
     "roles": "libs/roles",
+    "shared-secrets": "libs/shared/secrets",
     "shared-stripe": "libs/shared/stripe"
   }
 }
