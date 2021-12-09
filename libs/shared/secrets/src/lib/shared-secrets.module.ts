@@ -14,7 +14,7 @@ export class SecretConfigModule {
       module: SecretConfigModule,
       imports: [ConfigModule.forRoot({ isGlobal: true })],
       providers: [
-        { provide: SharedSecretsService, useClass: SharedSecretsService },
+        SharedSecretsService,
         FetchSecretsService,
         {
           provide: 'CONFIG_OPTIONS',
@@ -27,9 +27,7 @@ export class SecretConfigModule {
           inject: [FetchSecretsService],
         },
       ],
-      exports: [
-        // { provide: SecretConfigService, useClass: SecretConfigService },
-      ],
+      exports: [SharedSecretsService],
     };
   }
 }
