@@ -1,31 +1,38 @@
 {
   "implicitDependencies": {
     "workspace.json": "*",
-    "package.json": { "dependencies": "*", "devDependencies": "*" },
+    "package.json": {
+      "dependencies": "*",
+      "devDependencies": "*"
+    },
     "tsconfig.base.json": "*",
     "tslint.json": "*",
     ".eslintrc.json": "*",
     "nx.json": "*"
   },
-  "affected": { "defaultBase": "master" },
+  "affected": {
+    "defaultBase": "master"
+  },
   "npmScope": "make-pi",
   "tasksRunnerOptions": {
     "default": {
       "runner": "@nrwl/workspace/tasks-runners/default",
-      "options": { "cacheableOperations": ["build", "lint", "test", "e2e"] }
+      "options": {
+        "cacheableOperations": ["build", "lint", "test", "e2e"],
+        "parallel": 1
+      }
     }
   },
-  "projects": {
-    "make-pi": { "tags": [] },
-    "database": { "tags": [] },
-    "models-users": { "tags": [] },
-    "auth": { "tags": [] },
-    "bcrypt": { "tags": [] },
-    "roles": { "tags": [] },
-    "global-config": { "tags": [] },
-    "models-payment-sources": { "tags": [] },
-    "models-payments": { "tags": [] },
-    "shared-stripe": { "tags": [] },
-    "infrastructure": { "tags": [] }
-  }
+  "targetDependencies": {
+    "build": [
+      {
+        "target": "build",
+        "projects": "dependencies"
+      }
+    ]
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/nest"
+  },
+  "defaultProject": "make-pi"
 }
