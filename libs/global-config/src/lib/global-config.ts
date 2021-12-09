@@ -30,3 +30,7 @@ export const paymentMethods: PaymentMethods = {
     id: PaymentMethod.STRIPE_ACH,
   },
 };
+
+export enum SecretNames {
+  SECRET_NAME_STRIPE_API_KEY = 'SECRET_NAME_STRIPE_API_KEY',
+}
