@@ -44,6 +44,7 @@
     "nest-access-control": "^2.0.2",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.0.0",
+    "stripe": "^8.191.0",
     "tslib": "^2.0.0",
     "typeorm": "^0.2.32",
     "uuid": "^8.3.2"

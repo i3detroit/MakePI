@@ -6,12 +6,12 @@ import { SharedSecretsService } from './shared-secrets.service';
 @Module({
   providers: [FetchSecretsService],
 })
-export class SecretConfigModule {
+export class SharedSecretsModule {
   static register;
 
   public static registerAsync(options: SharedSecretsOptions): DynamicModule {
     return {
-      module: SecretConfigModule,
+      module: SharedSecretsModule,
       imports: [ConfigModule.forRoot({ isGlobal: true })],
       providers: [
         SharedSecretsService,
