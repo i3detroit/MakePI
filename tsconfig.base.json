@@ -23,6 +23,9 @@
       "@make-pi/models/users": ["libs/models/users/src/index.ts"],
       "@make-pi/roles": ["libs/roles/src/index.ts"],
       "@make-pi/shared/auth": ["libs/shared/auth/src/index.ts"],
+      "@make-pi/shared/aws/secrets-manager": [
+        "libs/shared/aws/secrets-manager/src/index.ts"
+      ],
       "@make-pi/shared/bcrypt": ["libs/shared/bcrypt/src/index.ts"],
       "@make-pi/shared/database": ["libs/shared/database/src/index.ts"],
       "@make-pi/shared/secrets": ["libs/shared/secrets/src/index.ts"],

@@ -1,0 +1,23 @@
+{
+  "root": "libs/shared/aws/secrets-manager",
+  "sourceRoot": "libs/shared/aws/secrets-manager/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/shared/aws/secrets-manager/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/shared/aws/secrets-manager"],
+      "options": {
+        "jestConfig": "libs/shared/aws/secrets-manager/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
