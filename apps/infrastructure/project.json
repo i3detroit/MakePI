@@ -1,0 +1,90 @@
+{
+  "root": "apps/infrastructure",
+  "sourceRoot": "apps/infrastructure/src",
+  "projectType": "application",
+  "targets": {
+    "bootstrap": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "cwd": "apps/infrastructure",
+        "profile": "makepi-pipelines",
+        "cloudformation-execution-policies": "arn:aws:iam::aws:policy/AdministratorAccess aws://{{AccountId}}/{{Region}}",
+        "command": "cdk bootstrap"
+      }
+    },
+    "synth": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "cwd": "apps/infrastructure",
+        "command": "cdk synth",
+        "lookups": false,
+        "strict": true,
+        "app": "'ts-node -r tsconfig-paths/register src/main.ts'"
+      },
+      "outputs": ["dist/apps/global-infrastructure"]
+    },
+    "deploy": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "cwd": "apps/infrastructure",
+        "command": "cdk deploy --all",
+        "profile": "makepi-pipelines",
+        "app": "'ts-node -r tsconfig-paths/register src/main.ts'"
+      }
+    },
+    "destroy": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "cwd": "apps/infrastructure",
+        "command": "cdk destroy --all",
+        "profile": "makepi-pipelines",
+        "app": "'ts-node -r tsconfig-paths/register src/main.ts'"
+      }
+    },
+    "build": {
+      "executor": "@nrwl/node:build",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/infrastructure",
+        "main": "apps/infrastructure/src/main.ts",
+        "tsConfig": "apps/infrastructure/tsconfig.app.json",
+        "assets": ["apps/infrastructure/src/assets"]
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "extractLicenses": true,
+          "inspect": false,
+          "fileReplacements": [
+            {
+              "replace": "apps/infrastructure/src/environments/environment.ts",
+              "with": "apps/infrastructure/src/environments/environment.prod.ts"
+            }
+          ]
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/node:execute",
+      "options": {
+        "buildTarget": "infrastructure:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["apps/infrastructure/**/*.ts"]
+      },
+      "outputs": ["{options.outputFile}"]
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/infrastructure"],
+      "options": {
+        "jestConfig": "apps/infrastructure/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

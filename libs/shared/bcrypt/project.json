@@ -1,0 +1,23 @@
+{
+  "root": "libs/shared/bcrypt",
+  "sourceRoot": "libs/shared/bcrypt/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/shared/bcrypt/**/*.ts"]
+      },
+      "outputs": ["{options.outputFile}"]
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/shared/bcrypt"],
+      "options": {
+        "jestConfig": "libs/shared/bcrypt/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

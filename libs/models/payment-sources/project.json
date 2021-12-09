@@ -1,0 +1,23 @@
+{
+  "root": "libs/models/payment-sources",
+  "sourceRoot": "libs/models/payment-sources/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/models/payment-sources/**/*.ts"]
+      },
+      "outputs": ["{options.outputFile}"]
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/models/payment-sources"],
+      "options": {
+        "jestConfig": "libs/models/payment-sources/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

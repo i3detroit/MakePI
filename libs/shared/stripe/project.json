@@ -1,0 +1,23 @@
+{
+  "root": "libs/shared/stripe",
+  "sourceRoot": "libs/shared/stripe/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/shared/stripe/**/*.ts"]
+      },
+      "outputs": ["{options.outputFile}"]
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/shared/stripe"],
+      "options": {
+        "jestConfig": "libs/shared/stripe/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
