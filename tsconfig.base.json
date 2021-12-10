@@ -30,7 +30,8 @@
       "@make-pi/shared/bcrypt": ["libs/shared/bcrypt/src/index.ts"],
       "@make-pi/shared/database": ["libs/shared/database/src/index.ts"],
       "@make-pi/shared/secrets": ["libs/shared/secrets/src/index.ts"],
-      "@make-pi/shared/stripe": ["libs/shared/stripe/src/index.ts"]
+      "@make-pi/shared/stripe": ["libs/shared/stripe/src/index.ts"],
+      "@make-pi/shared/users": ["libs/shared/users/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
