@@ -45,4 +45,10 @@ export class User {
 
   @OneToMany(() => Payment, (payment) => payment.user)
   payments: Payment[];
+
+  @Column({
+    type: 'uuid',
+    nullable: true,
+  })
+  stripeCustomerId?: string;
 }

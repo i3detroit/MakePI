@@ -1,2 +1,3 @@
 export * from './lib/shared-stripe.module';
-export * from './lib/shared-stripe.service';
+export * from './lib/stripe-customers.service';
+export * from './lib/stripe-charges.service';

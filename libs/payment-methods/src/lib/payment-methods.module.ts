@@ -1,15 +1,12 @@
 import { Module } from '@nestjs/common';
-import { StripeCreditCardService } from './stripe-credit-card/stripe-credit-card.service';
-import { StripeBankAccountService } from './stripe-bank-account/stripe-bank-account.service';
 import { PaymentMethodsService } from './payment-methods.service';
+import { SharedStripeModule } from '@make-pi/shared/stripe';
+import { AuthModule } from '@make-pi/shared/auth';
+import { StripeSourceService } from './stripe-source/stripe-source.service';
 
 @Module({
-  controllers: [],
-  providers: [
-    StripeCreditCardService,
-    StripeBankAccountService,
-    PaymentMethodsService,
-  ],
+  imports: [SharedStripeModule, AuthModule],
+  providers: [PaymentMethodsService, StripeSourceService],
   exports: [PaymentMethodsService],
 })
 export class PaymentMethodsModule {}

@@ -164,6 +164,7 @@ export const failedLoginMessages = {
 
 export const createUserErrors = {
   DUPLICATE_USER_ID: 'User already exists',
+  USER_NOT_FOUND: 'User not found',
 };
 
 export const changeRoleErrors = {

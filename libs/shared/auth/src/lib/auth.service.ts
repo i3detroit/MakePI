@@ -205,6 +205,10 @@ export class AuthService {
     });
   }
 
+  async getUser(userId: string) {
+    return await this.usersService.findOneById(userId);
+  }
+
   /**
    * Random string generator
    *

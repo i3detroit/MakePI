@@ -3,15 +3,14 @@ export enum EnvNames {
   PROD = 'prod',
 }
 
-export enum PaymentMethod {
-  STRIPE_CC = 'STRIPE_CREDIT_CARD',
-  STRIPE_ACH = 'STRIPE_ACH',
+export enum PaymentMethodTypes {
+  STRIPE_SOURCE = 'STRIPE_SOURCE',
 }
 
 interface PaymentMethodDetails {
   brand: string;
   product: string;
-  id: PaymentMethod;
+  id: PaymentMethodTypes;
 }
 
 interface PaymentMethods {
@@ -19,15 +18,10 @@ interface PaymentMethods {
 }
 
 export const paymentMethods: PaymentMethods = {
-  STRIPE_CC: {
+  STRIPE_SOURCE: {
     brand: 'Stripe',
-    product: 'Credit Card Payment',
-    id: PaymentMethod.STRIPE_CC,
-  },
-  STRIPE_ACH: {
-    brand: 'Stripe',
-    product: 'ACH Payment',
-    id: PaymentMethod.STRIPE_ACH,
+    product: 'Payment Source',
+    id: PaymentMethodTypes.STRIPE_SOURCE,
   },
 };
 
