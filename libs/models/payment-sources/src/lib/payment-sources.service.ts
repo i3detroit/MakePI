@@ -30,6 +30,7 @@ export class PaymentSourcesService {
         method: data.method,
         sourceId: data.sourceId,
         verified: data.verified,
+        enabled: data.enabled,
         metadata: data.metadata,
         user,
       })

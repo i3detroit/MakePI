@@ -1,11 +1,12 @@
-import { PaymentMethod } from '@make-pi/global-config';
+import { PaymentMethodTypes } from '@make-pi/global-config';
 
 export interface CreatePaymentSource {
-  method: PaymentMethod;
+  method: PaymentMethodTypes;
   userId: string;
   sourceId: string;
   metadata;
   verified: boolean;
+  enabled: boolean;
 }
 
 export interface UpdatePaymentSource {

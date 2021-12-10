@@ -14,6 +14,7 @@ export interface UpdateUser {
   recoverCode?: string;
   active?: boolean;
   verificationCode?: string;
+  stripeCustomerId: string;
 }
 
 export interface ReturnCreatedUser {
