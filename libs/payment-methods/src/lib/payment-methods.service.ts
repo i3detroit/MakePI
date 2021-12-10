@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { PaymentMethodTypes } from './payment-methods.interface';
+import { PaymentMethodTypes } from '@make-pi/global-config';
 
 @Injectable()
 export class PaymentMethodsService {

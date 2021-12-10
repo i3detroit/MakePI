@@ -1,21 +1,22 @@
-import { AuthService, createUserErrors } from '@make-pi/shared/auth';
+import { createUserErrors } from '@make-pi/shared/auth';
 import { StripeCustomersService } from '@make-pi/shared/stripe';
 import { Injectable } from '@nestjs/common';
 import Stripe from 'stripe';
 import { CreateStripeBankAccountData } from '../payment-methods.interface';
 import { PaymentSource } from '@make-pi/shared/database';
+import { UsersService } from '@make-pi/models/users';
 
 @Injectable()
 export class StripeSourceService {
   constructor(
     private stripeCustomersService: StripeCustomersService,
-    private authService: AuthService
+    private usersService: UsersService
   ) {}
 
   async create(userId: string, data: CreateStripeBankAccountData) {
     let customer: Stripe.Response<Stripe.Customer | Stripe.DeletedCustomer>;
 
-    const user = await this.authService.getUser(userId);
+    const user = await this.usersService.findOneById(userId);
 
     if (!user) throw new Error(createUserErrors.USER_NOT_FOUND);
 
@@ -41,6 +42,8 @@ export class StripeSourceService {
       paymentSource.metadata = {};
       paymentSource.verified = false;
       paymentSource.enabled = true;
-    } catch (err) {}
+    } catch (err) {
+      console.error(err);
+    }
   }
 }
