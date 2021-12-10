@@ -14,7 +14,6 @@
     "roles": "libs/roles",
     "shared-aws-secrets-manager": "libs/shared/aws/secrets-manager",
     "shared-secrets": "libs/shared/secrets",
-    "shared-stripe": "libs/shared/stripe",
-    "shared-users": "libs/shared/users"
+    "shared-stripe": "libs/shared/stripe"
   }
 }
