@@ -27,4 +27,5 @@ export const paymentMethods: PaymentMethods = {
 
 export enum SecretNames {
   SECRET_NAME_STRIPE_API_KEY = 'SECRET_NAME_STRIPE_API_KEY',
+  SECRET_NAME_STRIPE_WEBHOOK_SECRET = 'SECRET_NAME_STRIPE_WEBHOOK_SECRET',
 }

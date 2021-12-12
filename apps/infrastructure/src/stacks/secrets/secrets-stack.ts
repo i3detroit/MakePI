@@ -14,5 +14,14 @@ export class SecretsStack extends Stack {
         generateStringKey: 'value',
       },
     });
+
+    new Secret(this, 'StripeWebhookSecret', {
+      secretName: `STRIPE_WEHBOOK_SECRET_${props.envName.toUpperCase()}`,
+      description: 'Stripe Webhook Secret',
+      generateSecretString: {
+        secretStringTemplate: JSON.stringify({}),
+        generateStringKey: 'value',
+      },
+    });
   }
 }
