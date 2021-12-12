@@ -22,6 +22,20 @@ export class StripeCustomersService {
     return this.stripe.customers.retrieve(id, params, options);
   }
 
+  retrieveSource(
+    customerId: string,
+    id: string,
+    params?: Stripe.CustomerSourceRetrieveParams,
+    options?: Stripe.RequestOptions
+  ): Promise<Stripe.Response<Stripe.CustomerSource>> {
+    return this.stripe.customers.retrieveSource(
+      customerId,
+      id,
+      params,
+      options
+    );
+  }
+
   create(
     params?: Stripe.CustomerCreateParams,
     options?: Stripe.RequestOptions

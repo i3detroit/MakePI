@@ -8,6 +8,7 @@ import {
   ValidationPipe,
   Request,
   BadRequestException,
+  Get,
 } from '@nestjs/common';
 import {
   PaymentMethodsService,
@@ -38,6 +39,22 @@ export class PaymentSourceController {
         req.user.sub,
         body
       );
+    } catch (err) {
+      throw new BadRequestException({ message: [err.message] });
+    }
+  }
+
+  @Get()
+  @UseGuards(ACGuard)
+  @UseRoles({
+    resource: 'payment-source',
+    action: 'read',
+    possession: 'own',
+  })
+  @UsePipes(new ValidationPipe())
+  async getPayment(@Request() req: AppRequest) {
+    try {
+      return await this.paymentsService.getAllByUserId(req.user.sub);
     } catch (err) {
       throw new BadRequestException({ message: [err.message] });
     }

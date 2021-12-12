@@ -2,6 +2,7 @@ import {
   Column,
   Entity,
   Index,
+  JoinColumn,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
@@ -19,10 +20,12 @@ export class PaymentSource {
   method: string;
 
   @ManyToOne(() => User, (user) => user.paymentSources)
+  @JoinColumn()
   @Index()
   user: User;
 
   @OneToMany(() => Payment, (payment) => payment.paymentSource)
+  @JoinColumn()
   payments: Payment[];
 
   @Column({ length: 1024 })

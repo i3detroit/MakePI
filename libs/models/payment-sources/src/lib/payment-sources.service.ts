@@ -8,17 +8,17 @@ import { CreatePaymentSource } from './payment-sources.interface';
 export class PaymentSourcesService {
   constructor(
     @Inject('PAYMENT_SOURCE_REPOSITORY')
-    private paymentSourceRepository: Repository<PaymentSource>
+    private paymentSourceRepository: Repository<PaymentSource>,
+    @Inject('USER_REPOSITORY')
+    private userRepository: Repository<User>
   ) {}
 
   findOneById(id: string): Promise<PaymentSource> {
     return this.paymentSourceRepository.findOne(id, { relations: ['user'] });
   }
 
-  findAllByUser(id: string): Promise<PaymentSource[]> {
-    const user = new User();
-    user.id = id;
-    return this.paymentSourceRepository.find({ user });
+  findAllByUser(id: string): Promise<User> {
+    return this.userRepository.findOne(id, { relations: ['paymentSources'] });
   }
 
   async create(data: CreatePaymentSource): Promise<PaymentSource> {

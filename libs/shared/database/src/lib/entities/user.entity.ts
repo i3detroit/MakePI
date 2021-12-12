@@ -39,6 +39,7 @@ export class User {
   verificationCode: string;
 
   @OneToMany(() => Role, (role) => role.user)
+  @JoinColumn()
   roles: Role[];
 
   @OneToMany(() => PaymentSource, (paymentSource) => paymentSource.user)
@@ -46,6 +47,7 @@ export class User {
   paymentSources: PaymentSource[];
 
   @OneToMany(() => Payment, (payment) => payment.user)
+  @JoinColumn()
   payments: Payment[];
 
   @Column({

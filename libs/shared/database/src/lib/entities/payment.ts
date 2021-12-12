@@ -2,6 +2,7 @@ import {
   Column,
   Entity,
   Index,
+  JoinColumn,
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
@@ -25,10 +26,12 @@ export class Payment {
   id: string;
 
   @ManyToOne(() => User, (user) => user.payments)
+  @JoinColumn()
   @Index()
   user: User;
 
   @ManyToOne(() => PaymentSource, (paymentSource) => paymentSource.payments)
+  @JoinColumn()
   @Index()
   paymentSource: PaymentSource;
 

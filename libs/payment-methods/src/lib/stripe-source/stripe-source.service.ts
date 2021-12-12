@@ -55,4 +55,17 @@ export class StripeSourceService {
 
     return paymentSource;
   }
+
+  async getCustomer(
+    id: string
+  ): Promise<Stripe.Response<Stripe.Customer | Stripe.DeletedCustomer>> {
+    return await this.stripeCustomersService.retrieve(id);
+  }
+
+  async getSource(
+    customerId: string,
+    id: string
+  ): Promise<Stripe.Response<Stripe.CustomerSource>> {
+    return await this.stripeCustomersService.retrieveSource(customerId, id);
+  }
 }
