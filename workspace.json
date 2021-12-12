@@ -15,6 +15,7 @@
     "sandbox-ui": "apps/sandbox-ui",
     "shared-aws-secrets-manager": "libs/shared/aws/secrets-manager",
     "shared-secrets": "libs/shared/secrets",
-    "shared-stripe": "libs/shared/stripe"
+    "shared-stripe": "libs/shared/stripe",
+    "webhook": "apps/webhook"
   }
 }
