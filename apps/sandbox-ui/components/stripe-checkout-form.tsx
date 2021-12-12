@@ -16,16 +16,19 @@ export const CheckoutForm = ({ stripe }: { stripe: Promise<Stripe> }) => {
 
     const card = elements.getElement(CardElement);
 
-    const { error, paymentMethod } = await (
+    const { error, source } = await (
       await stripe
-    ).createPaymentMethod({
+    ).createSource(card, {
       type: 'card',
-      card,
+      currency: process.env.NEXT_PUBLIC_STRIPE_CURRENCY,
+      owner: {
+        name: 'Testy McTestface',
+      },
     });
 
     if (error) return console.error(error);
 
-    setId(paymentMethod?.id);
+    setId(source?.id);
     card.clear();
   };
 

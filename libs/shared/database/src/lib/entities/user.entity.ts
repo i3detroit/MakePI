@@ -4,6 +4,7 @@ import {
   PrimaryGeneratedColumn,
   Index,
   OneToMany,
+  JoinColumn,
 } from 'typeorm';
 import { Payment } from './payment';
 import { PaymentSource } from './payment-source';
@@ -41,6 +42,7 @@ export class User {
   roles: Role[];
 
   @OneToMany(() => PaymentSource, (paymentSource) => paymentSource.user)
+  @JoinColumn()
   paymentSources: PaymentSource[];
 
   @OneToMany(() => Payment, (payment) => payment.user)

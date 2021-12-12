@@ -140,6 +140,10 @@ export interface ClaimVerifyResult {
   readonly error?: Error;
 }
 
+export interface AppRequest {
+  user: Claim;
+}
+
 /**
  * Failed Login Reasons
  */

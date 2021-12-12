@@ -1,3 +1,4 @@
+import { SharedAwsSecretsManagerModule } from '@make-pi/shared/aws/secrets-manager';
 import { Module, DynamicModule } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { FetchSecretsService } from './fetch-secrets.service';
@@ -12,7 +13,10 @@ export class SharedSecretsModule {
   public static registerAsync(options: SharedSecretsOptions): DynamicModule {
     return {
       module: SharedSecretsModule,
-      imports: [ConfigModule.forRoot({ isGlobal: true })],
+      imports: [
+        SharedAwsSecretsManagerModule,
+        ConfigModule.forRoot({ isGlobal: true }),
+      ],
       providers: [
         SharedSecretsService,
         FetchSecretsService,

@@ -23,31 +23,32 @@ export class StripeSourceService {
     let customer: Stripe.Response<Stripe.Customer | Stripe.DeletedCustomer>;
 
     const user = await this.usersService.findOneById(userId);
+    let stripeCustomerId = user.stripeCustomerId;
 
     if (!user) throw new Error(createUserErrors.USER_NOT_FOUND);
 
-    if (user.stripeCustomerId) {
-      customer = await this.stripeCustomersService.retrieve(
-        user.stripeCustomerId
-      );
+    if (stripeCustomerId) {
+      customer = await this.stripeCustomersService.retrieve(stripeCustomerId);
     } else {
       customer = await this.stripeCustomersService.create({
-        email: user.id,
+        email: user.email,
       });
-      this.usersService.update(user.id, { stripeCustomerId: customer.id });
+      stripeCustomerId = customer.id;
+      this.usersService.update(user.id, { stripeCustomerId });
     }
 
-    const source = await this.stripeCustomersService.createSource(userId, {
-      source: data.publicToken,
-    });
+    const source = await this.stripeCustomersService.createSource(
+      stripeCustomerId,
+      {
+        source: data.publicToken,
+      }
+    );
 
     const paymentSource = await this.paymentSourcesService.create({
       method: PaymentMethodTypes.STRIPE_SOURCE,
       userId: user.id,
       sourceId: source.id,
-      metadata: {
-        object: source.object,
-      },
+      metadata: {},
       verified: false,
       enabled: true,
     });

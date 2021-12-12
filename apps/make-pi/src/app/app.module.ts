@@ -11,9 +11,11 @@ import { PaymentController } from './payment/payment.controller';
 import { PaymentsModule } from '@make-pi/models/payments';
 import { PaymentSourcesModule } from '@make-pi/models/payment-sources';
 import { PaymentSourceController } from './payment-source/payment-source.controller';
+import { PaymentMethodsModule } from '@make-pi/payment-methods';
 
 @Module({
   imports: [
+    PaymentMethodsModule,
     AuthModule,
     UsersModule,
     PaymentsModule,

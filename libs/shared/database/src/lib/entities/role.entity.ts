@@ -1,6 +1,7 @@
 import {
   Column,
   Entity,
+  JoinColumn,
   ManyToOne,
   PrimaryGeneratedColumn,
   Unique,
@@ -17,5 +18,6 @@ export class Role {
   role: string;
 
   @ManyToOne(() => User, (user) => user.roles)
+  @JoinColumn()
   user: User;
 }
