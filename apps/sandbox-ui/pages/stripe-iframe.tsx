@@ -1,6 +1,6 @@
 import { Card, Container } from 'react-bootstrap';
 import React from 'react';
-import { CheckoutForm } from '../elements/stripe-checkout-form';
+import { CheckoutForm } from '../components/stripe-checkout-form';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 
