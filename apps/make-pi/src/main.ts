@@ -1,18 +1,8 @@
-import { NestFactory } from '@nestjs/core';
-import {
-  FastifyAdapter,
-  NestFastifyApplication,
-} from '@nestjs/platform-fastify';
-import { AppModule } from './app/app.module';
+import { bootstrap } from './app';
+import { environment } from './environments/environment';
 
-const port = process.env.PORT || 3333;
-
-async function bootstrap() {
-  const app = await NestFactory.create<NestFastifyApplication>(
-    AppModule,
-    new FastifyAdapter()
-  );
-  app.setGlobalPrefix('api');
-  await app.listen(port);
-}
-bootstrap();
+(async () => {
+  const port = process.env.PORT ? Number(process.env.PORT) : environment.port;
+  const fastifyInstance = await bootstrap();
+  await fastifyInstance.instance.listen(port, '0.0.0.0');
+})().catch(console.error.bind(console));
