@@ -10,11 +10,11 @@ import {
   Request,
 } from '@nestjs/common';
 
-@Controller('stripe')
-export class AppController {
+@Controller('webhooks')
+export class WebhooksController {
   constructor(private stripeWebhooksService: StripeWebhooksService) {}
 
-  @Post()
+  @Post('stripe')
   async stripeWebhooks(@Body() body, @Request() req: StripeWebhookRequest) {
     let event;
     try {

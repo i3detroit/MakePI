@@ -12,6 +12,7 @@ import { PaymentsModule } from '@make-pi/models/payments';
 import { PaymentSourcesModule } from '@make-pi/models/payment-sources';
 import { PaymentSourceController } from './payment-source/payment-source.controller';
 import { PaymentMethodsModule } from '@make-pi/payment-methods';
+import { WebhooksController } from './webhooks/webhooks.controller';
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { PaymentMethodsModule } from '@make-pi/payment-methods';
     UserController,
     PaymentController,
     PaymentSourceController,
+    WebhooksController,
   ],
 })
 export class AppModule {}
