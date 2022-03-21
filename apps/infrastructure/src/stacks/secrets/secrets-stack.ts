@@ -1,5 +1,6 @@
-import { Secret } from '@aws-cdk/aws-secretsmanager';
-import { Construct, Stack } from '@aws-cdk/core';
+import { Secret } from 'aws-cdk-lib/aws-secretsmanager';
+import { Stack } from 'aws-cdk-lib';
+import { Construct } from 'constructs';
 import { StackPropsExt } from '../pipelines/pipelines-interface';
 
 export class SecretsStack extends Stack {

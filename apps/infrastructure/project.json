@@ -8,8 +8,8 @@
       "options": {
         "cwd": "apps/infrastructure",
         "profile": "makepi-pipelines",
-        "cloudformation-execution-policies": "arn:aws:iam::aws:policy/AdministratorAccess aws://{{AccountId}}/{{Region}}",
-        "command": "cdk bootstrap"
+        "cloudformation-execution-policies": "arn:aws:iam::aws:policy/AdministratorAccess",
+        "command": "cdk bootstrap aws://412000172883/us-east-1"
       }
     },
     "synth": {

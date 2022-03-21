@@ -8,7 +8,10 @@ import { StripeWebhooksService } from './stripe-webhooks.service';
 @Module({
   imports: [
     SharedSecretsModule.registerAsync({
-      secrets: [SecretNames.SECRET_NAME_STRIPE_API_KEY],
+      secrets: [
+        SecretNames.SECRET_NAME_STRIPE_API_KEY,
+        SecretNames.SECRET_NAME_STRIPE_WEBHOOK_SECRET,
+      ],
     }),
   ],
   providers: [
@@ -16,6 +19,10 @@ import { StripeWebhooksService } from './stripe-webhooks.service';
     StripeChargesService,
     StripeWebhooksService,
   ],
-  exports: [StripeCustomersService, StripeChargesService],
+  exports: [
+    StripeCustomersService,
+    StripeChargesService,
+    StripeWebhooksService,
+  ],
 })
 export class SharedStripeModule {}

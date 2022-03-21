@@ -1,10 +1,11 @@
-import { Construct, SecretValue, Stack, StackProps } from '@aws-cdk/core';
+import { SecretValue, Stack, StackProps } from 'aws-cdk-lib';
+import { Construct } from 'constructs';
 import { environment } from '../../environments/environment';
 import {
   CodePipeline,
   CodePipelineSource,
   ShellStep,
-} from '@aws-cdk/pipelines';
+} from 'aws-cdk-lib/pipelines';
 import { ServicesStage } from './services-stage';
 import { EnvNames } from '@make-pi/global-config';
 

@@ -1,4 +1,5 @@
-import { Construct, Stage } from '@aws-cdk/core';
+import { Stage } from 'aws-cdk-lib';
+import { Construct } from 'constructs';
 import { SecretsStack } from '../secrets/secrets-stack';
 import { StackPropsExt } from './pipelines-interface';
 
