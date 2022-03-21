@@ -42,26 +42,10 @@
       }
     },
     "build": {
-      "executor": "@nrwl/node:build",
+      "executor": "@nrwl/workspace:run-commands",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/apps/infrastructure",
-        "main": "apps/infrastructure/src/main.ts",
-        "tsConfig": "apps/infrastructure/tsconfig.app.json",
-        "assets": ["apps/infrastructure/src/assets"]
-      },
-      "configurations": {
-        "production": {
-          "optimization": true,
-          "extractLicenses": true,
-          "inspect": false,
-          "fileReplacements": [
-            {
-              "replace": "apps/infrastructure/src/environments/environment.ts",
-              "with": "apps/infrastructure/src/environments/environment.prod.ts"
-            }
-          ]
-        }
+        "command": "exit 0"
       }
     },
     "serve": {

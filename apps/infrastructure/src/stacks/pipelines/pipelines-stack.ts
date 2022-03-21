@@ -28,7 +28,11 @@ export class PipelinesStack extends Stack {
 
     const synth = new ShellStep('Synth', {
       input,
-      commands: ['npm ci', 'npm run nx run infrastructure:synth'],
+      installCommands: ['yarn install --frozen-lockfile'],
+      commands: [
+        'yarn nx run infrastructure:build',
+        'yarn nx run infrastructure:synth',
+      ],
       primaryOutputDirectory: 'dist/apps/infrastructure',
     });
 
