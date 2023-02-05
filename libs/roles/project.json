@@ -1,0 +1,23 @@
+{
+  "name": "roles",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/roles/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/roles/**/*.ts"]
+      },
+      "outputs": ["{options.outputFile}"]
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/roles"],
+      "options": {
+        "jestConfig": "libs/roles/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

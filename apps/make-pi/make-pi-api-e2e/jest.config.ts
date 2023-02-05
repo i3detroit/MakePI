@@ -1,6 +1,6 @@
 /* eslint-disable */
 export default {
-  displayName: 'make-pi-make-pi-api-e2e',
+  displayName: 'make-pi-api-e2e',
   preset: '../../../jest.preset.js',
   globals: {
     'ts-jest': {
@@ -15,5 +15,5 @@ export default {
     '^.+\\.[tj]s$': 'ts-jest',
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
-  coverageDirectory: '../../../coverage/make-pi-make-pi-api-e2e',
+  coverageDirectory: '../../../coverage/make-pi-api-e2e',
 };
