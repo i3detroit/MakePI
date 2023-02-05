@@ -1,26 +1,51 @@
 {
   "implicitDependencies": {
     "workspace.json": "*",
-    "package.json": { "dependencies": "*", "devDependencies": "*" },
+    "package.json": {
+      "dependencies": "*",
+      "devDependencies": "*"
+    },
     "tsconfig.base.json": "*",
     "tslint.json": "*",
     ".eslintrc.json": "*",
     "nx.json": "*"
   },
-  "affected": { "defaultBase": "master" },
+  "affected": {
+    "defaultBase": "master"
+  },
   "npmScope": "make-pi",
   "tasksRunnerOptions": {
     "default": {
-      "runner": "@nrwl/workspace/tasks-runners/default",
-      "options": { "cacheableOperations": ["build", "lint", "test", "e2e"] }
+      "runner": "@nrwl/nx-cloud",
+      "options": {
+        "cacheableOperations": [
+          "build",
+          "lint",
+          "test",
+          "e2e"
+        ],
+        "accessToken": "YjI1OGNlYzQtZWNiYi00ZTIwLWIyZjAtZmQ3NWFmZWJjY2Q4fHJlYWQtd3JpdGU="
+      }
     }
   },
   "projects": {
-    "make-pi": { "tags": [] },
-    "database": { "tags": [] },
-    "models-users": { "tags": [] },
-    "auth": { "tags": [] },
-    "bcrypt": { "tags": [] },
-    "roles": { "tags": [] }
+    "make-pi": {
+      "tags": []
+    },
+    "database": {
+      "tags": []
+    },
+    "models-users": {
+      "tags": []
+    },
+    "auth": {
+      "tags": []
+    },
+    "bcrypt": {
+      "tags": []
+    },
+    "roles": {
+      "tags": []
+    }
   }
 }
