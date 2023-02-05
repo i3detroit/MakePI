@@ -19,8 +19,21 @@
       "runner": "@nrwl/nx-cloud",
       "options": {
         "cacheableOperations": ["build", "lint", "test", "e2e"],
-        "accessToken": "YjI1OGNlYzQtZWNiYi00ZTIwLWIyZjAtZmQ3NWFmZWJjY2Q4fHJlYWQtd3JpdGU="
+        "accessToken": "YjI1OGNlYzQtZWNiYi00ZTIwLWIyZjAtZmQ3NWFmZWJjY2Q4fHJlYWQtd3JpdGU=",
+        "parallel": 1
       }
     }
-  }
+  },
+  "targetDependencies": {
+    "build": [
+      {
+        "target": "build",
+        "projects": "dependencies"
+      }
+    ]
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/nest"
+  },
+  "defaultProject": "make-pi"
 }
