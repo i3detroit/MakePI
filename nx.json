@@ -1,26 +1,39 @@
 {
-  "implicitDependencies": {
-    "workspace.json": "*",
-    "package.json": { "dependencies": "*", "devDependencies": "*" },
-    "tsconfig.base.json": "*",
-    "tslint.json": "*",
-    ".eslintrc.json": "*",
-    "nx.json": "*"
+  "affected": {
+    "defaultBase": "master"
   },
-  "affected": { "defaultBase": "master" },
   "npmScope": "make-pi",
   "tasksRunnerOptions": {
     "default": {
-      "runner": "@nrwl/workspace/tasks-runners/default",
-      "options": { "cacheableOperations": ["build", "lint", "test", "e2e"] }
+      "runner": "@nrwl/nx-cloud",
+      "options": {
+        "cacheableOperations": ["build", "lint", "test", "e2e"],
+        "accessToken": "YjI1OGNlYzQtZWNiYi00ZTIwLWIyZjAtZmQ3NWFmZWJjY2Q4fHJlYWQtd3JpdGU=",
+        "parallel": 1
+      }
     }
   },
-  "projects": {
-    "make-pi": { "tags": [] },
-    "database": { "tags": [] },
-    "models-users": { "tags": [] },
-    "auth": { "tags": [] },
-    "bcrypt": { "tags": [] },
-    "roles": { "tags": [] }
+  "$schema": "./node_modules/nx/schemas/nx-schema.json",
+  "targetDefaults": {
+    "build": {
+      "dependsOn": ["^build"],
+      "inputs": ["production", "^production"]
+    },
+    "test": {
+      "inputs": ["default", "^default", "{workspaceRoot}/jest.preset.js"]
+    },
+    "lint": {
+      "inputs": ["default", "{workspaceRoot}/.eslintrc.json"]
+    }
+  },
+  "namedInputs": {
+    "default": ["{projectRoot}/**/*", "sharedGlobals"],
+    "sharedGlobals": [
+      "{workspaceRoot}/workspace.json",
+      "{workspaceRoot}/tsconfig.base.json",
+      "{workspaceRoot}/tslint.json",
+      "{workspaceRoot}/nx.json"
+    ],
+    "production": ["default"]
   }
 }

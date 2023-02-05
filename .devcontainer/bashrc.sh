@@ -5,6 +5,6 @@ parse_git_branch() {
 }
 export PS1="$(echo -e '\U00002699') \w \[\e[94m\]\$(parse_git_branch)\[\e[00m\]\$ "
 
-if [ -f /.devcontainer/git-completion.sh ]; then
-  . /.devcontainer/git-completion.sh
+if [ -f /src/.devcontainer/git-completion.sh ]; then
+  . /src/.devcontainer/git-completion.sh
 fi

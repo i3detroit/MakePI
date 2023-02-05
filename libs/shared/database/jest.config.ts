@@ -1,15 +1,14 @@
-module.exports = {
-  displayName: 'bcrypt',
+/* eslint-disable */
+export default {
+  displayName: 'database',
   preset: '../../../jest.preset.js',
   globals: {
-    'ts-jest': {
-      tsConfig: '<rootDir>/tsconfig.spec.json',
-    },
+    'ts-jest': { tsconfig: '<rootDir>/tsconfig.spec.json' },
   },
   testEnvironment: 'node',
   transform: {
     '^.+\\.[tj]sx?$': 'ts-jest',
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-  coverageDirectory: '../../../coverage/libs/shared/bcrypt',
+  coverageDirectory: '../../../coverage/libs/shared/database',
 };
