@@ -67,6 +67,28 @@
         }
       }
     },
+    "make-pi-api": "apps/make-pi/api",
+    "make-pi-make-pi-api-e2e": {
+      "root": "apps/make-pi/make-pi-api-e2e",
+      "implicitDependencies": ["make-pi-api"],
+      "targets": {
+        "e2e": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["{workspaceRoot}/coverage/{e2eProjectRoot}"],
+          "options": {
+            "jestConfig": "apps/make-pi/make-pi-api-e2e/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/make-pi/make-pi-api-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    },
     "models-users": {
       "root": "libs/models/users",
       "sourceRoot": "libs/models/users/src",
