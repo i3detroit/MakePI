@@ -1,4 +1,5 @@
-module.exports = {
+/* eslint-disable */
+export default {
   displayName: 'make-pi',
   preset: '../../jest.preset.js',
   globals: {

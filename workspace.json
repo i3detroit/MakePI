@@ -17,7 +17,7 @@
           "executor": "@nrwl/jest:jest",
           "outputs": ["coverage/libs/shared/auth"],
           "options": {
-            "jestConfig": "libs/shared/auth/jest.config.js",
+            "jestConfig": "libs/shared/auth/jest.config.ts",
             "passWithNoTests": true
           }
         }
@@ -39,7 +39,7 @@
           "executor": "@nrwl/jest:jest",
           "outputs": ["coverage/libs/shared/bcrypt"],
           "options": {
-            "jestConfig": "libs/shared/bcrypt/jest.config.js",
+            "jestConfig": "libs/shared/bcrypt/jest.config.ts",
             "passWithNoTests": true
           }
         }
@@ -61,7 +61,7 @@
           "executor": "@nrwl/jest:jest",
           "outputs": ["coverage/libs/shared/database"],
           "options": {
-            "jestConfig": "libs/shared/database/jest.config.js",
+            "jestConfig": "libs/shared/database/jest.config.ts",
             "passWithNoTests": true
           }
         }
@@ -73,13 +73,15 @@
       "projectType": "application",
       "targets": {
         "build": {
-          "executor": "@nrwl/node:webpack",
+          "executor": "@nrwl/webpack:webpack",
           "outputs": ["{options.outputPath}"],
           "options": {
             "outputPath": "dist/apps/make-pi",
             "main": "apps/make-pi/src/main.ts",
             "tsConfig": "apps/make-pi/tsconfig.app.json",
-            "assets": ["apps/make-pi/src/assets"]
+            "assets": ["apps/make-pi/src/assets"],
+            "target": "node",
+            "compiler": "tsc"
           },
           "configurations": {
             "production": {
@@ -112,7 +114,7 @@
           "executor": "@nrwl/jest:jest",
           "outputs": ["coverage/apps/make-pi"],
           "options": {
-            "jestConfig": "apps/make-pi/jest.config.js",
+            "jestConfig": "apps/make-pi/jest.config.ts",
             "passWithNoTests": true
           }
         }
@@ -134,7 +136,7 @@
           "executor": "@nrwl/jest:jest",
           "outputs": ["coverage/libs/models/users"],
           "options": {
-            "jestConfig": "libs/models/users/jest.config.js",
+            "jestConfig": "libs/models/users/jest.config.ts",
             "passWithNoTests": true
           }
         }
@@ -156,11 +158,12 @@
           "executor": "@nrwl/jest:jest",
           "outputs": ["coverage/libs/roles"],
           "options": {
-            "jestConfig": "libs/roles/jest.config.js",
+            "jestConfig": "libs/roles/jest.config.ts",
             "passWithNoTests": true
           }
         }
       }
     }
-  }
+  },
+  "$schema": "./node_modules/nx/schemas/workspace-schema.json"
 }
