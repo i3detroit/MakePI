@@ -67,59 +67,6 @@
         }
       }
     },
-    "make-pi": {
-      "root": "apps/make-pi",
-      "sourceRoot": "apps/make-pi/src",
-      "projectType": "application",
-      "targets": {
-        "build": {
-          "executor": "@nrwl/webpack:webpack",
-          "outputs": ["{options.outputPath}"],
-          "options": {
-            "outputPath": "dist/apps/make-pi",
-            "main": "apps/make-pi/src/main.ts",
-            "tsConfig": "apps/make-pi/tsconfig.app.json",
-            "assets": ["apps/make-pi/src/assets"],
-            "target": "node",
-            "compiler": "tsc"
-          },
-          "configurations": {
-            "production": {
-              "optimization": true,
-              "extractLicenses": true,
-              "inspect": false,
-              "fileReplacements": [
-                {
-                  "replace": "apps/make-pi/src/environments/environment.ts",
-                  "with": "apps/make-pi/src/environments/environment.prod.ts"
-                }
-              ]
-            }
-          }
-        },
-        "serve": {
-          "executor": "@nrwl/node:node",
-          "options": {
-            "buildTarget": "make-pi:build"
-          }
-        },
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["apps/make-pi/**/*.ts"]
-          },
-          "outputs": ["{options.outputFile}"]
-        },
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "outputs": ["{workspaceRoot}/coverage/apps/make-pi"],
-          "options": {
-            "jestConfig": "apps/make-pi/jest.config.ts",
-            "passWithNoTests": true
-          }
-        }
-      }
-    },
     "models-users": {
       "root": "libs/models/users",
       "sourceRoot": "libs/models/users/src",
