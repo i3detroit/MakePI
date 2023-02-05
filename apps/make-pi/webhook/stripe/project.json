@@ -1,0 +1,61 @@
+{
+  "name": "make-pi-webhook-stripe",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/make-pi/webhook/stripe/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "target": "node",
+        "compiler": "tsc",
+        "outputPath": "dist/apps/make-pi/webhook/stripe",
+        "main": "apps/make-pi/webhook/stripe/src/main.ts",
+        "tsConfig": "apps/make-pi/webhook/stripe/tsconfig.app.json",
+        "assets": ["apps/make-pi/webhook/stripe/src/assets"],
+        "webpackConfig": "apps/make-pi/webhook/stripe/webpack.config.js"
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "extractLicenses": true,
+          "inspect": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/js:node",
+      "options": {
+        "buildTarget": "make-pi-webhook-stripe:build"
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "make-pi-webhook-stripe:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/make-pi/webhook/stripe/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/make-pi/webhook/stripe/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    }
+  },
+  "tags": []
+}
