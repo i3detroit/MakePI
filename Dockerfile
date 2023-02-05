@@ -11,4 +11,5 @@ RUN apt-get install -y build-essential curl vim nano git
 
 RUN curl -sL https://deb.nodesource.com/setup_18.x | bash - \
   && apt-get install -y nodejs \
-  && npm i -g npm
+  && npm i -g npm \
+  && npm config set legacy-peer-deps true -g
