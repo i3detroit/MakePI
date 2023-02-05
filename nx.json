@@ -22,25 +22,5 @@
         "accessToken": "YjI1OGNlYzQtZWNiYi00ZTIwLWIyZjAtZmQ3NWFmZWJjY2Q4fHJlYWQtd3JpdGU="
       }
     }
-  },
-  "projects": {
-    "make-pi": {
-      "tags": []
-    },
-    "database": {
-      "tags": []
-    },
-    "models-users": {
-      "tags": []
-    },
-    "auth": {
-      "tags": []
-    },
-    "bcrypt": {
-      "tags": []
-    },
-    "roles": {
-      "tags": []
-    }
   }
 }
