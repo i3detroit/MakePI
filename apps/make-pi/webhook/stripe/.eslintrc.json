@@ -1,9 +1,12 @@
 {
-  "extends": ["../../../.eslintrc.json"],
+  "extends": ["../../../../.eslintrc.json"],
   "ignorePatterns": ["!**/*"],
   "overrides": [
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
+      "parserOptions": {
+        "project": ["apps/make-pi/webhook/stripe/tsconfig.*?.json"]
+      },
       "rules": {}
     },
     {

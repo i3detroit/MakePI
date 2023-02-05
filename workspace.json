@@ -5,7 +5,7 @@
     "bcrypt": "libs/shared/bcrypt",
     "database": "libs/shared/database",
     "make-pi-api": "apps/make-pi/api",
-    "make-pi-api-e2e": "apps/make-pi/make-pi-api-e2e",
+    "make-pi-webhook-stripe": "apps/make-pi/webhook/stripe",
     "models-users": "libs/models/users",
     "roles": "libs/roles"
   },
