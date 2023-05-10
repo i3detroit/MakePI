@@ -5,6 +5,7 @@ import { BcryptService } from '@make-pi/shared/bcrypt';
 import { CreateUser, ReturnCreatedUser, UpdateUser } from './users.interface';
 import { ConfigService } from '@nestjs/config';
 import { AppRoles } from '@make-pi/roles';
+import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class UsersService {
@@ -14,28 +15,28 @@ export class UsersService {
   );
 
   constructor(
-    @Inject('USER_REPOSITORY')
-    private userRepository: Repository<User>,
-    @Inject('ROLE_REPOSITORY')
-    private roleRepository: Repository<Role>,
+    @InjectRepository(User)
+    private usersRepository: Repository<User>,
+    @InjectRepository(Role)
+    private rolesRepository: Repository<Role>,
     private bcryptService: BcryptService,
     private configService: ConfigService
   ) {}
 
   findAll(): Promise<User[]> {
-    return this.userRepository.find();
+    return this.usersRepository.find();
   }
 
   findByActive(active: boolean): Promise<User[]> {
-    return this.userRepository.find({ active });
+    return this.usersRepository.find({ active });
   }
 
   findOneById(id: string): Promise<User> {
-    return this.userRepository.findOne(id, { relations: ['roles'] });
+    return this.usersRepository.findOne(id, { relations: ['roles'] });
   }
 
   findOneByEmail(email: string): Promise<User> {
-    return this.userRepository.findOne(
+    return this.usersRepository.findOne(
       { email: email.toLowerCase() },
       { relations: ['roles'] }
     );
@@ -47,7 +48,7 @@ export class UsersService {
     const hash = await this.bcryptService.hash(password, salt);
     data.email = email.toLowerCase();
     data.password = hash;
-    const result = await this.userRepository.insert(data);
+    const result = await this.usersRepository.insert(data);
     const [generatedMap] = result.generatedMaps;
     return {
       id: generatedMap.id,
@@ -65,22 +66,22 @@ export class UsersService {
       const hash = await this.bcryptService.hash(data.password, salt);
       data.password = hash;
     }
-    return await this.userRepository.update(id, data);
+    return await this.usersRepository.update(id, data);
   }
 
   async addRole(id: string, appRole: AppRoles) {
-    const user = await this.userRepository.findOne(id);
+    const user = await this.usersRepository.findOne(id);
     const role = new Role();
     role.role = appRole;
     role.user = user;
-    return await this.roleRepository.save(role);
+    return await this.rolesRepository.save(role);
   }
 
   async removeRole(id: string, appRole: AppRoles): Promise<DeleteResult> {
-    const user = await this.userRepository.findOne(id, {
+    const user = await this.usersRepository.findOne(id, {
       relations: ['roles'],
     });
     const [role] = user.roles.filter((n) => n.role === appRole);
-    return this.roleRepository.delete(role);
+    return this.rolesRepository.delete(role);
   }
 }
