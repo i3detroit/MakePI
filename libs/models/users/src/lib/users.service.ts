@@ -69,6 +69,10 @@ export class UsersService {
     return await this.usersRepository.update(id, data);
   }
 
+  async delete(id: string): Promise<void> {
+    await this.usersRepository.delete({ id });
+  }
+
   async addRole(id: string, appRole: AppRoles) {
     const user = await this.usersRepository.findOne(id);
     const role = new Role();
